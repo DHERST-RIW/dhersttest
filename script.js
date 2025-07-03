@@ -323,3 +323,34 @@ function preloadImages() {
 window.addEventListener('load', preloadImages);
 
 console.log('Date-based image system initialized');
+
+// Test function - you can call this in browser console to test different dates
+window.testImageForDate = function(day) {
+    console.log(`Testing image for day ${day}`);
+
+    let imageName;
+    if (imageMap[day]) {
+        imageName = imageMap[day];
+    } else {
+        const cycleDay = ((day - 4) % 5) + 1;
+        if (cycleDay === 1) imageName = 'pg1.jpg';
+        else if (cycleDay === 2) imageName = 'pg2.jpg';
+        else if (cycleDay === 3) imageName = 'pg3.jpg';
+        else if (cycleDay === 4) imageName = 'pg4.jpg';
+        else imageName = 'pg5.jpg';
+    }
+
+    console.log(`Day ${day} should show: ${imageName}`);
+
+    // Actually change the image
+    floatingImage.style.opacity = '0';
+    setTimeout(() => {
+        floatingImage.src = imageName;
+        floatingImage.style.opacity = '1';
+        console.log(`Image changed to: ${imageName}`);
+    }, 250);
+};
+
+console.log('Test function available: testImageForDate(day)');
+console.log('Example: testImageForDate(4) for July 4th');
+console.log('Example: testImageForDate(5) for July 5th');
