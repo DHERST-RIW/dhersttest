@@ -255,38 +255,65 @@ window.addEventListener('scroll', debouncedScrollHandler);
 
 console.log('Website loaded successfully!');
 
-// Floating Image Rotation
+// Date-based Floating Image System
 const floatingImage = document.getElementById('floating-image');
-const imageNames = ['pg1.jpg', 'pg2.jpg', 'pg3.jpg', 'pg4.jpg', 'pg5.jpg'];
-let currentImageIndex = 0;
 
-function rotateFloatingImage() {
-    console.log(`Rotating to image: ${imageNames[currentImageIndex]} -> ${imageNames[(currentImageIndex + 1) % imageNames.length]}`);
+// Image mapping based on day of month
+// Day 3 (today, Thursday July 3rd) = pg.jpg
+// Day 4 = pg1.jpg, Day 5 = pg2.jpg, etc.
+const imageMap = {
+    3: 'pg.jpg',    // July 3rd (today)
+    4: 'pg1.jpg',   // July 4th
+    5: 'pg2.jpg',   // July 5th
+    6: 'pg3.jpg',   // July 6th
+    7: 'pg4.jpg',   // July 7th
+    8: 'pg5.jpg'    // July 8th
+};
 
-    // Fade out current image
+function setImageBasedOnDate() {
+    const today = new Date();
+    const dayOfMonth = today.getDate();
+
+    // Get the appropriate image for today's date
+    let imageName;
+    if (imageMap[dayOfMonth]) {
+        imageName = imageMap[dayOfMonth];
+    } else {
+        // For days not specifically mapped, cycle through pg1-pg5
+        const cycleDay = ((dayOfMonth - 4) % 5) + 1; // Start cycle from day 4
+        if (cycleDay === 1) imageName = 'pg1.jpg';
+        else if (cycleDay === 2) imageName = 'pg2.jpg';
+        else if (cycleDay === 3) imageName = 'pg3.jpg';
+        else if (cycleDay === 4) imageName = 'pg4.jpg';
+        else imageName = 'pg5.jpg';
+    }
+
+    console.log(`Today is ${today.toDateString()} (Day ${dayOfMonth})`);
+    console.log(`Setting image to: ${imageName}`);
+
+    // Set the image with fade effect
     floatingImage.style.opacity = '0';
 
     setTimeout(() => {
-        // Change to next image
-        currentImageIndex = (currentImageIndex + 1) % imageNames.length;
-        floatingImage.src = imageNames[currentImageIndex];
-
-        console.log(`Image changed to: ${imageNames[currentImageIndex]}`);
-
-        // Fade in new image
+        floatingImage.src = imageName;
         floatingImage.style.opacity = '1';
-    }, 250); // Half of the transition duration
+        console.log(`Image set to: ${imageName}`);
+    }, 250);
 }
 
-// Start image rotation every 2 minutes (120,000 milliseconds)
-// For testing: every 5 seconds (5000 milliseconds) - change back to 120000 for production
-setInterval(rotateFloatingImage, 5000);
+// Set image immediately when page loads
+setImageBasedOnDate();
 
-console.log('Image rotation initialized - will change every 5 seconds for testing');
+// Check for date change every hour (3600000 milliseconds)
+// This ensures the image updates if the date changes while the page is open
+setInterval(() => {
+    setImageBasedOnDate();
+}, 3600000);
 
 // Preload all images for smooth transitions
 function preloadImages() {
-    imageNames.forEach(imageName => {
+    const allImages = ['pg.jpg', 'pg1.jpg', 'pg2.jpg', 'pg3.jpg', 'pg4.jpg', 'pg5.jpg'];
+    allImages.forEach(imageName => {
         const img = new Image();
         img.src = imageName;
     });
@@ -294,3 +321,5 @@ function preloadImages() {
 
 // Preload images when page loads
 window.addEventListener('load', preloadImages);
+
+console.log('Date-based image system initialized');
