@@ -254,3 +254,43 @@ const debouncedScrollHandler = debounce(() => {
 window.addEventListener('scroll', debouncedScrollHandler);
 
 console.log('Website loaded successfully!');
+
+// Floating Image Rotation
+const floatingImage = document.getElementById('floating-image');
+const imageNames = ['pg1.jpg', 'pg2.jpg', 'pg3.jpg', 'pg4.jpg', 'pg5.jpg'];
+let currentImageIndex = 0;
+
+function rotateFloatingImage() {
+    console.log(`Rotating to image: ${imageNames[currentImageIndex]} -> ${imageNames[(currentImageIndex + 1) % imageNames.length]}`);
+
+    // Fade out current image
+    floatingImage.style.opacity = '0';
+
+    setTimeout(() => {
+        // Change to next image
+        currentImageIndex = (currentImageIndex + 1) % imageNames.length;
+        floatingImage.src = imageNames[currentImageIndex];
+
+        console.log(`Image changed to: ${imageNames[currentImageIndex]}`);
+
+        // Fade in new image
+        floatingImage.style.opacity = '1';
+    }, 250); // Half of the transition duration
+}
+
+// Start image rotation every 2 minutes (120,000 milliseconds)
+// For testing: every 5 seconds (5000 milliseconds) - change back to 120000 for production
+setInterval(rotateFloatingImage, 5000);
+
+console.log('Image rotation initialized - will change every 5 seconds for testing');
+
+// Preload all images for smooth transitions
+function preloadImages() {
+    imageNames.forEach(imageName => {
+        const img = new Image();
+        img.src = imageName;
+    });
+}
+
+// Preload images when page loads
+window.addEventListener('load', preloadImages);

@@ -44,6 +44,7 @@ body {
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease-in-out;
 }
 
 @keyframes float {
@@ -52,6 +53,31 @@ body {
     }
     50% {
         transform: translateY(-10px);
+    }
+}
+
+/* Mobile responsive adjustments for floating logo */
+@media (max-width: 768px) {
+    .floating-logo {
+        top: 10px;
+        right: 10px;
+    }
+
+    .floating-logo img {
+        width: 150px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-logo {
+        top: 5px;
+        right: 5px;
+    }
+
+    .floating-logo img {
+        width: 120px;
+        height: 104px;
     }
 }
 
