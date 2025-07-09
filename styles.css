@@ -42,8 +42,10 @@ body {
     width: 600px;
     height: 520px;
     object-fit: contain;
-    transition: opacity 0.5s ease-in-out;
-    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1 !important;
+    filter: none;
+    background: none;
 }
 
 @keyframes float {

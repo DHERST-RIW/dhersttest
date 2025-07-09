@@ -267,8 +267,8 @@ for (let i = 1; i <= 50; i++) {
 let currentImageIndex = 0;
 
 function changeImage() {
-    // Set the image with fade effect (but keep it clear, not transparent)
-    floatingImage.style.opacity = '0';
+    // Quick fade effect for smooth transition
+    floatingImage.style.opacity = '0.1';
 
     setTimeout(() => {
         floatingImage.src = imageArray[currentImageIndex];
@@ -277,11 +277,13 @@ function changeImage() {
 
         // Move to next image, loop back to start when reaching the end
         currentImageIndex = (currentImageIndex + 1) % imageArray.length;
-    }, 250);
+    }, 150);
 }
 
-// Set first image immediately when page loads
-changeImage();
+// Set first image immediately when page loads with full opacity
+floatingImage.src = imageArray[0];
+floatingImage.style.opacity = '1';
+currentImageIndex = 1; // Start from second image for the timer
 
 // Change image every 5 seconds (5000 milliseconds)
 setInterval(() => {
