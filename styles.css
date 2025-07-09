@@ -60,56 +60,71 @@ body {
 /* Mobile responsive adjustments for floating logo */
 @media (max-width: 768px) {
     .floating-logo {
-        top: 120px !important;  /* Move much lower to avoid navbar */
-        right: 15px !important;
-        z-index: 999 !important;
         position: fixed !important;
+        top: 15px !important;
+        left: 15px !important;
+        right: auto !important;
+        z-index: 9999 !important;
         display: block !important;
+        visibility: visible !important;
+        pointer-events: none !important;
     }
 
     .floating-logo img {
-        width: 200px !important;
-        height: 180px !important;
+        width: 120px !important;
+        height: 108px !important;
         opacity: 1 !important;
         display: block !important;
         visibility: visible !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 }
 
 @media (max-width: 480px) {
     .floating-logo {
-        top: 100px !important;  /* Position well below mobile nav */
-        right: 10px !important;
-        z-index: 999 !important;
         position: fixed !important;
+        top: 10px !important;
+        left: 10px !important;
+        right: auto !important;
+        z-index: 9999 !important;
         display: block !important;
+        visibility: visible !important;
+        pointer-events: none !important;
     }
 
     .floating-logo img {
-        width: 170px !important;
-        height: 150px !important;
+        width: 100px !important;
+        height: 90px !important;
         opacity: 1 !important;
         display: block !important;
         visibility: visible !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 }
 
 /* Extra small screens */
 @media (max-width: 360px) {
     .floating-logo {
-        top: 90px !important;  /* Position well below navbar */
-        right: 8px !important;
-        z-index: 999 !important;
         position: fixed !important;
+        top: 8px !important;
+        left: 8px !important;
+        right: auto !important;
+        z-index: 9999 !important;
         display: block !important;
+        visibility: visible !important;
+        pointer-events: none !important;
     }
 
     .floating-logo img {
-        width: 150px !important;
-        height: 135px !important;
+        width: 80px !important;
+        height: 72px !important;
         opacity: 1 !important;
         display: block !important;
         visibility: visible !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 }
 
@@ -662,10 +677,81 @@ body {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2rem;
+        padding: 0 15px;
+    }
+
+    /* Clean mobile hero section */
+    .hero {
+        padding-top: 80px;
+    }
+
+    .hero-content {
+        margin-bottom: 2rem;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        line-height: 1.3;
+        margin-bottom: 1rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
     }
 
     .hero-title {
         font-size: 2.5rem;
+    }
+}
+
+/* Mobile specific improvements for 480px and below */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.5rem !important;
+    }
+
+    .hero-description {
+        font-size: 0.9rem !important;
+    }
+
+    .navbar {
+        padding: 0.3rem 0 !important;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    .feature-card {
+        padding: 1.5rem !important;
+    }
+}
+
+/* Extra small screens improvements */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.3rem !important;
+    }
+
+    .hero-description {
+        font-size: 0.85rem !important;
+    }
+
+    .container {
+        padding: 0 10px !important;
     }
 
     .hero-buttons {
