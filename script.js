@@ -255,65 +255,42 @@ window.addEventListener('scroll', debouncedScrollHandler);
 
 console.log('Website loaded successfully!');
 
-// Date-based Floating Image System
+// Timer-based Floating Image System (5-second intervals)
 const floatingImage = document.getElementById('floating-image');
 
-// Image mapping based on day of month
-// Day 3 (today, Thursday July 3rd) = pg.jpg
-// Day 4 = pg1.jpg, Day 5 = pg2.jpg, etc.
-const imageMap = {
-    3: 'pg.jpg',    // July 3rd (today)
-    4: 'pg1.jpg',   // July 4th
-    5: 'pg2.jpg',   // July 5th
-    6: 'pg3.jpg',   // July 6th
-    7: 'pg4.jpg',   // July 7th
-    8: 'pg5.jpg'    // July 8th
-};
+// Generate array of all PNG images from the images folder (1.png to 50.png)
+const imageArray = [];
+for (let i = 1; i <= 50; i++) {
+    imageArray.push(`images/${i}.png`);
+}
 
-function setImageBasedOnDate() {
-    const today = new Date();
-    const dayOfMonth = today.getDate();
+let currentImageIndex = 0;
 
-    // Get the appropriate image for today's date
-    let imageName;
-    if (imageMap[dayOfMonth]) {
-        imageName = imageMap[dayOfMonth];
-    } else {
-        // For days not specifically mapped, cycle through pg1-pg5
-        const cycleDay = ((dayOfMonth - 4) % 5) + 1; // Start cycle from day 4
-        if (cycleDay === 1) imageName = 'pg1.jpg';
-        else if (cycleDay === 2) imageName = 'pg2.jpg';
-        else if (cycleDay === 3) imageName = 'pg3.jpg';
-        else if (cycleDay === 4) imageName = 'pg4.jpg';
-        else imageName = 'pg5.jpg';
-    }
-
-    console.log(`Today is ${today.toDateString()} (Day ${dayOfMonth})`);
-    console.log(`Setting image to: ${imageName}`);
-
+function changeImage() {
     // Set the image with fade effect
     floatingImage.style.opacity = '0';
 
     setTimeout(() => {
-        floatingImage.src = imageName;
+        floatingImage.src = imageArray[currentImageIndex];
         floatingImage.style.opacity = '1';
-        console.log(`Image set to: ${imageName}`);
+        console.log(`Image changed to: ${imageArray[currentImageIndex]}`);
+
+        // Move to next image, loop back to start when reaching the end
+        currentImageIndex = (currentImageIndex + 1) % imageArray.length;
     }, 250);
 }
 
-// Set image immediately when page loads
-setImageBasedOnDate();
+// Set first image immediately when page loads
+changeImage();
 
-// Check for date change every hour (3600000 milliseconds)
-// This ensures the image updates if the date changes while the page is open
+// Change image every 5 seconds (5000 milliseconds)
 setInterval(() => {
-    setImageBasedOnDate();
-}, 3600000);
+    changeImage();
+}, 5000);
 
 // Preload all images for smooth transitions
 function preloadImages() {
-    const allImages = ['pg.jpg', 'pg1.jpg', 'pg2.jpg', 'pg3.jpg', 'pg4.jpg', 'pg5.jpg'];
-    allImages.forEach(imageName => {
+    imageArray.forEach(imageName => {
         const img = new Image();
         img.src = imageName;
     });
@@ -322,33 +299,12 @@ function preloadImages() {
 // Preload images when page loads
 window.addEventListener('load', preloadImages);
 
-console.log('Date-based image system initialized');
+console.log('Timer-based image system initialized with 5-second intervals');
+console.log(`Total images available: ${imageArray.length}`);
 
-// Test function - you can call this in browser console to test different dates
-window.testImageForDate = function(day) {
-    console.log(`Testing image for day ${day}`);
-
-    let imageName;
-    if (imageMap[day]) {
-        imageName = imageMap[day];
-    } else {
-        const cycleDay = ((day - 4) % 5) + 1;
-        if (cycleDay === 1) imageName = 'pg1.jpg';
-        else if (cycleDay === 2) imageName = 'pg2.jpg';
-        else if (cycleDay === 3) imageName = 'pg3.jpg';
-        else if (cycleDay === 4) imageName = 'pg4.jpg';
-        else imageName = 'pg5.jpg';
-    }
-
-    console.log(`Day ${day} should show: ${imageName}`);
-
-    // Actually change the image
-    floatingImage.style.opacity = '0';
-    setTimeout(() => {
-        floatingImage.src = imageName;
-        floatingImage.style.opacity = '1';
-        console.log(`Image changed to: ${imageName}`);
-    }, 250);
+// Test function - you can call this in browser console to manually change image
+window.nextImage = function() {
+    changeImage();
 };
 
 console.log('Test function available: testImageForDate(day)');
