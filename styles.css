@@ -60,7 +60,7 @@ body {
 /* Mobile responsive adjustments for floating logo */
 @media (max-width: 768px) {
     .floating-logo {
-        top: 80px;  /* Move below navigation */
+        top: 60px;  /* Move below shorter navigation */
         right: 15px;
         z-index: 999;  /* Ensure it's visible above other content */
     }
@@ -73,7 +73,7 @@ body {
 
 @media (max-width: 480px) {
     .floating-logo {
-        top: 70px;  /* Position below mobile nav */
+        top: 55px;  /* Position below shorter mobile nav */
         right: 10px;
         z-index: 999;
     }
@@ -87,7 +87,7 @@ body {
 /* Extra small screens */
 @media (max-width: 360px) {
     .floating-logo {
-        top: 65px;
+        top: 50px;
         right: 8px;
     }
 
@@ -111,7 +111,7 @@ body {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     transition: all 0.3s ease;
 }
 
