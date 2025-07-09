@@ -288,7 +288,7 @@ currentImageIndex = 1; // Start from second image for the timer
 // Change image every 5 seconds (5000 milliseconds)
 setInterval(() => {
     changeImage();
-}, 5000);
+}, 10000);
 
 // Preload all images for smooth transitions
 function preloadImages() {
