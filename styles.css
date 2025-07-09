@@ -60,50 +60,56 @@ body {
 /* Mobile responsive adjustments for floating logo */
 @media (max-width: 768px) {
     .floating-logo {
-        top: 50px;  /* Position below smaller navbar */
-        right: 10px;
-        z-index: 1001;  /* Higher z-index to ensure visibility */
+        top: 120px !important;  /* Move much lower to avoid navbar */
+        right: 15px !important;
+        z-index: 999 !important;
         position: fixed !important;
+        display: block !important;
     }
 
     .floating-logo img {
-        width: 180px;
-        height: 160px;
+        width: 200px !important;
+        height: 180px !important;
         opacity: 1 !important;
         display: block !important;
+        visibility: visible !important;
     }
 }
 
 @media (max-width: 480px) {
     .floating-logo {
-        top: 45px;  /* Position below smaller mobile nav */
-        right: 8px;
-        z-index: 1001;
+        top: 100px !important;  /* Position well below mobile nav */
+        right: 10px !important;
+        z-index: 999 !important;
         position: fixed !important;
+        display: block !important;
     }
 
     .floating-logo img {
-        width: 150px;
-        height: 135px;
+        width: 170px !important;
+        height: 150px !important;
         opacity: 1 !important;
         display: block !important;
+        visibility: visible !important;
     }
 }
 
 /* Extra small screens */
 @media (max-width: 360px) {
     .floating-logo {
-        top: 40px;  /* Position below very small navbar */
-        right: 5px;
-        z-index: 1001;
+        top: 90px !important;  /* Position well below navbar */
+        right: 8px !important;
+        z-index: 999 !important;
         position: fixed !important;
+        display: block !important;
     }
 
     .floating-logo img {
-        width: 130px;
-        height: 115px;
+        width: 150px !important;
+        height: 135px !important;
         opacity: 1 !important;
         display: block !important;
+        visibility: visible !important;
     }
 }
 
@@ -142,23 +148,23 @@ body {
 }
 
 .nav-logo-img {
-    width: 15px;
-    height: 15px;
+    width: 12px;
+    height: 12px;
     object-fit: contain;
 }
 
 .nav-logo-text h2 {
     color: var(--primary-color);
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     margin: 0;
 }
 
 .nav-logo-text span {
     color: var(--grey-medium);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     display: block;
-    margin-top: -5px;
+    margin-top: -3px;
 }
 
 .nav-menu {
@@ -634,7 +640,7 @@ body {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 45px;
         flex-direction: column;
         background-color: white;
         width: 100%;
