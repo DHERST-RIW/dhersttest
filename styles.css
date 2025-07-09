@@ -60,40 +60,50 @@ body {
 /* Mobile responsive adjustments for floating logo */
 @media (max-width: 768px) {
     .floating-logo {
-        top: 60px;  /* Move below shorter navigation */
-        right: 15px;
-        z-index: 999;  /* Ensure it's visible above other content */
+        top: 80px;  /* Move further below navigation */
+        right: 10px;
+        z-index: 1001;  /* Higher z-index to ensure visibility */
+        position: fixed !important;
     }
 
     .floating-logo img {
-        width: 180px;
-        height: 160px;
+        width: 200px;
+        height: 180px;
+        opacity: 1 !important;
+        display: block !important;
     }
 }
 
 @media (max-width: 480px) {
     .floating-logo {
-        top: 55px;  /* Position below shorter mobile nav */
-        right: 10px;
-        z-index: 999;
+        top: 75px;  /* Position well below mobile nav */
+        right: 8px;
+        z-index: 1001;
+        position: fixed !important;
     }
 
     .floating-logo img {
-        width: 150px;
-        height: 135px;
+        width: 170px;
+        height: 150px;
+        opacity: 1 !important;
+        display: block !important;
     }
 }
 
 /* Extra small screens */
 @media (max-width: 360px) {
     .floating-logo {
-        top: 50px;
-        right: 8px;
+        top: 70px;
+        right: 5px;
+        z-index: 1001;
+        position: fixed !important;
     }
 
     .floating-logo img {
-        width: 130px;
-        height: 115px;
+        width: 140px;
+        height: 125px;
+        opacity: 1 !important;
+        display: block !important;
     }
 }
 
