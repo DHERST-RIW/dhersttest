@@ -34,8 +34,8 @@ body {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 1000;
-    animation: float 6s ease-in-out infinite;
+    z-index: 10000;
+    animation: float 10s ease-in-out infinite;
 }
 
 .floating-logo img {
@@ -53,7 +53,7 @@ body {
         transform: translateY(0px);
     }
     50% {
-        transform: translateY(-6px);
+        transform: translateY(-2px);
     }
 }
 
@@ -61,14 +61,14 @@ body {
 @media (max-width: 768px) {
     .floating-logo {
         position: fixed !important;
-        top: 15px !important;
+        top: 50px !important;
         left: 15px !important;
         right: auto !important;
-        z-index: 9999 !important;
+        z-index: 10001 !important;
         display: block !important;
         visibility: visible !important;
         pointer-events: none !important;
-        animation: float 6s ease-in-out infinite !important;
+        animation: float 10s ease-in-out infinite !important;
     }
 
     .floating-logo img {
@@ -85,14 +85,14 @@ body {
 @media (max-width: 480px) {
     .floating-logo {
         position: fixed !important;
-        top: 10px !important;
+        top: 45px !important;
         left: 10px !important;
         right: auto !important;
-        z-index: 9999 !important;
+        z-index: 10001 !important;
         display: block !important;
         visibility: visible !important;
         pointer-events: none !important;
-        animation: float 6s ease-in-out infinite !important;
+        animation: float 10s ease-in-out infinite !important;
     }
 
     .floating-logo img {
@@ -110,14 +110,14 @@ body {
 @media (max-width: 360px) {
     .floating-logo {
         position: fixed !important;
-        top: 8px !important;
+        top: 42px !important;
         left: 8px !important;
         right: auto !important;
-        z-index: 9999 !important;
+        z-index: 10001 !important;
         display: block !important;
         visibility: visible !important;
         pointer-events: none !important;
-        animation: float 6s ease-in-out infinite !important;
+        animation: float 10s ease-in-out infinite !important;
     }
 
     .floating-logo img {
