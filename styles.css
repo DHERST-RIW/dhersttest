@@ -60,15 +60,15 @@ body {
 /* Mobile responsive adjustments for floating logo */
 @media (max-width: 768px) {
     .floating-logo {
-        top: 80px;  /* Move further below navigation */
+        top: 50px;  /* Position below smaller navbar */
         right: 10px;
         z-index: 1001;  /* Higher z-index to ensure visibility */
         position: fixed !important;
     }
 
     .floating-logo img {
-        width: 200px;
-        height: 180px;
+        width: 180px;
+        height: 160px;
         opacity: 1 !important;
         display: block !important;
     }
@@ -76,15 +76,15 @@ body {
 
 @media (max-width: 480px) {
     .floating-logo {
-        top: 75px;  /* Position well below mobile nav */
+        top: 45px;  /* Position below smaller mobile nav */
         right: 8px;
         z-index: 1001;
         position: fixed !important;
     }
 
     .floating-logo img {
-        width: 170px;
-        height: 150px;
+        width: 150px;
+        height: 135px;
         opacity: 1 !important;
         display: block !important;
     }
@@ -93,15 +93,15 @@ body {
 /* Extra small screens */
 @media (max-width: 360px) {
     .floating-logo {
-        top: 70px;
+        top: 40px;  /* Position below very small navbar */
         right: 5px;
         z-index: 1001;
         position: fixed !important;
     }
 
     .floating-logo img {
-        width: 140px;
-        height: 125px;
+        width: 130px;
+        height: 115px;
         opacity: 1 !important;
         display: block !important;
     }
@@ -121,7 +121,7 @@ body {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    padding: 0.5rem 0;
+    padding: 0.2rem 0;
     transition: all 0.3s ease;
 }
 
@@ -142,8 +142,8 @@ body {
 }
 
 .nav-logo-img {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     object-fit: contain;
 }
 
