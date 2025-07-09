@@ -268,7 +268,7 @@ let currentImageIndex = 0;
 
 function changeImage() {
     // Quick fade effect for smooth transition
-    floatingImage.style.opacity = '0.1';
+    floatingImage.style.opacity = '1';
 
     setTimeout(() => {
         floatingImage.src = imageArray[currentImageIndex];
