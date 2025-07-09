@@ -39,8 +39,8 @@ body {
 }
 
 .floating-logo img {
-    width: 600px;
-    height: 520px;
+    width: 550px;
+    height: 498px;
     object-fit: contain;
     transition: opacity 0.3s ease-in-out;
     opacity: 1 !important;
