@@ -62,8 +62,8 @@ body {
     .floating-logo {
         position: fixed !important;
         top: 60px !important;
-        left: 10px !important;
-        right: auto !important;
+        right: 10px !important;
+        left: auto !important;
         z-index: 99999 !important;
         display: block !important;
         visibility: visible !important;
@@ -74,9 +74,9 @@ body {
     }
 
     .floating-logo img {
-        width: 120px !important;
+        width: 150px !important;
         height: auto !important;
-        max-width: 120px !important;
+        max-width: 150px !important;
         opacity: 1 !important;
         display: block !important;
         visibility: visible !important;
@@ -93,8 +93,8 @@ body {
     .floating-logo {
         position: fixed !important;
         top: 55px !important;
-        left: 8px !important;
-        right: auto !important;
+        right: 8px !important;
+        left: auto !important;
         z-index: 99999 !important;
         display: block !important;
         visibility: visible !important;
@@ -105,9 +105,9 @@ body {
     }
 
     .floating-logo img {
-        width: 100px !important;
+        width: 130px !important;
         height: auto !important;
-        max-width: 100px !important;
+        max-width: 130px !important;
         opacity: 1 !important;
         display: block !important;
         visibility: visible !important;
@@ -125,8 +125,8 @@ body {
     .floating-logo {
         position: fixed !important;
         top: 50px !important;
-        left: 5px !important;
-        right: auto !important;
+        right: 5px !important;
+        left: auto !important;
         z-index: 99999 !important;
         display: block !important;
         visibility: visible !important;
@@ -137,9 +137,9 @@ body {
     }
 
     .floating-logo img {
-        width: 80px !important;
+        width: 110px !important;
         height: auto !important;
-        max-width: 80px !important;
+        max-width: 110px !important;
         opacity: 1 !important;
         display: block !important;
         visibility: visible !important;

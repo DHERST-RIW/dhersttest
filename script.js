@@ -275,7 +275,8 @@ function initializeMobileFloatingImage() {
         // Force visibility regardless of screen size for debugging
         floatingLogo.style.position = 'fixed';
         floatingLogo.style.top = '60px';
-        floatingLogo.style.left = '10px';
+        floatingLogo.style.right = '10px';
+        floatingLogo.style.left = 'auto';
         floatingLogo.style.zIndex = '99999';
         floatingLogo.style.display = 'block';
         floatingLogo.style.visibility = 'visible';
@@ -285,7 +286,7 @@ function initializeMobileFloatingImage() {
         floatingImg.style.display = 'block';
         floatingImg.style.visibility = 'visible';
         floatingImg.style.opacity = '1';
-        floatingImg.style.width = isMobile() ? '100px' : '120px';
+        floatingImg.style.width = isMobile() ? '130px' : '150px';
         floatingImg.style.height = 'auto';
         floatingImg.style.objectFit = 'contain';
         
@@ -385,13 +386,14 @@ window.showFloatingImage = function() {
         floatingLogo.style.cssText = `
             position: fixed !important;
             top: 60px !important;
-            left: 10px !important;
+            right: 10px !important;
+            left: auto !important;
             z-index: 99999 !important;
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
             pointer-events: none !important;
-            width: 120px !important;
+            width: 150px !important;
             height: auto !important;
         `;
         
@@ -399,7 +401,7 @@ window.showFloatingImage = function() {
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
-            width: 100px !important;
+            width: 130px !important;
             height: auto !important;
             object-fit: contain !important;
             border: 2px solid red !important;
