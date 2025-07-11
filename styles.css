@@ -60,74 +60,83 @@ body {
 /* Mobile responsive adjustments for floating logo */
 @media (max-width: 768px) {
     .floating-logo {
-        position: fixed !important;
-        top: 50px !important;
-        left: 15px !important;
-        right: auto !important;
-        z-index: 10001 !important;
-        display: block !important;
-        visibility: visible !important;
-        pointer-events: none !important;
-        animation: float 10s ease-in-out infinite !important;
+        position: fixed;
+        top: 50px;
+        left: 15px;
+        right: auto;
+        z-index: 9999;
+        display: block;
+        visibility: visible;
+        pointer-events: none;
+        animation: float 10s ease-in-out infinite;
     }
 
     .floating-logo img {
-        width: 120px !important;
-        height: 108px !important;
-        opacity: 1 !important;
-        display: block !important;
-        visibility: visible !important;
-        border: none !important;
-        box-shadow: none !important;
+        width: 120px;
+        height: 108px;
+        opacity: 1;
+        display: block;
+        visibility: visible;
+        object-fit: contain;
+        filter: none;
+        background: none;
+        border: none;
+        box-shadow: none;
     }
 }
 
 @media (max-width: 480px) {
     .floating-logo {
-        position: fixed !important;
-        top: 45px !important;
-        left: 10px !important;
-        right: auto !important;
-        z-index: 10001 !important;
-        display: block !important;
-        visibility: visible !important;
-        pointer-events: none !important;
-        animation: float 10s ease-in-out infinite !important;
+        position: fixed;
+        top: 45px;
+        left: 10px;
+        right: auto;
+        z-index: 9999;
+        display: block;
+        visibility: visible;
+        pointer-events: none;
+        animation: float 10s ease-in-out infinite;
     }
 
     .floating-logo img {
-        width: 100px !important;
-        height: 90px !important;
-        opacity: 1 !important;
-        display: block !important;
-        visibility: visible !important;
-        border: none !important;
-        box-shadow: none !important;
+        width: 100px;
+        height: 90px;
+        opacity: 1;
+        display: block;
+        visibility: visible;
+        object-fit: contain;
+        filter: none;
+        background: none;
+        border: none;
+        box-shadow: none;
     }
 }
 
 /* Extra small screens */
 @media (max-width: 360px) {
     .floating-logo {
-        position: fixed !important;
-        top: 42px !important;
-        left: 8px !important;
-        right: auto !important;
-        z-index: 10001 !important;
-        display: block !important;
-        visibility: visible !important;
-        pointer-events: none !important;
-        animation: float 10s ease-in-out infinite !important;
+        position: fixed;
+        top: 42px;
+        left: 8px;
+        right: auto;
+        z-index: 9999;
+        display: block;
+        visibility: visible;
+        pointer-events: none;
+        animation: float 10s ease-in-out infinite;
     }
 
     .floating-logo img {
-        width: 80px !important;
-        height: 72px !important;
-        opacity: 1 !important;
-        display: block !important;
-        visibility: visible !important;
-        border: none !important;
-        box-shadow: none !important;
+        width: 80px;
+        height: 72px;
+        opacity: 1;
+        display: block;
+        visibility: visible;
+        object-fit: contain;
+        filter: none;
+        background: none;
+        border: none;
+        box-shadow: none;
     }
 }
 
@@ -880,5 +889,18 @@ body {
     .footer-links {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+    }
+    
+    /* Ensure floating logo is always visible on mobile */
+    .floating-logo {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .floating-logo img {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 }

@@ -255,6 +255,31 @@ window.addEventListener('scroll', debouncedScrollHandler);
 
 console.log('Website loaded successfully!');
 
+// Mobile detection function
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+// Initialize floating image for mobile
+function initializeMobileFloatingImage() {
+    const floatingLogo = document.querySelector('.floating-logo');
+    const floatingImg = document.querySelector('#floating-image');
+    
+    if (isMobile() && floatingLogo && floatingImg) {
+        // Force visibility for mobile
+        floatingLogo.style.display = 'block';
+        floatingLogo.style.visibility = 'visible';
+        floatingLogo.style.opacity = '1';
+        floatingLogo.style.zIndex = '9999';
+        
+        floatingImg.style.display = 'block';
+        floatingImg.style.visibility = 'visible';
+        floatingImg.style.opacity = '1';
+        
+        console.log('Mobile floating image initialized');
+    }
+}
+
 // Timer-based Floating Image System (5-second intervals)
 const floatingImage = document.getElementById('floating-image');
 
@@ -283,7 +308,17 @@ function changeImage() {
 // Set first image immediately when page loads with full opacity
 floatingImage.src = imageArray[0];
 floatingImage.style.opacity = '1';
+floatingImage.style.display = 'block';
+floatingImage.style.visibility = 'visible';
 currentImageIndex = 1; // Start from second image for the timer
+
+// Ensure floating logo container is visible on mobile
+const floatingLogoContainer = document.querySelector('.floating-logo');
+if (floatingLogoContainer) {
+    floatingLogoContainer.style.display = 'block';
+    floatingLogoContainer.style.visibility = 'visible';
+    floatingLogoContainer.style.opacity = '1';
+}
 
 // Change image every 5 seconds (5000 milliseconds)
 setInterval(() => {
@@ -300,6 +335,12 @@ function preloadImages() {
 
 // Preload images when page loads
 window.addEventListener('load', preloadImages);
+
+// Initialize mobile floating image on page load
+window.addEventListener('load', initializeMobileFloatingImage);
+
+// Re-initialize on window resize
+window.addEventListener('resize', debounce(initializeMobileFloatingImage, 250));
 
 console.log('Timer-based image system initialized with 5-second intervals');
 console.log(`Total images available: ${imageArray.length}`);
