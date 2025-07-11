@@ -58,85 +58,97 @@ body {
 }
 
 /* Mobile responsive adjustments for floating logo */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .floating-logo {
-        position: fixed;
-        top: 50px;
-        left: 15px;
-        right: auto;
-        z-index: 9999;
-        display: block;
-        visibility: visible;
-        pointer-events: none;
-        animation: float 10s ease-in-out infinite;
+        position: fixed !important;
+        top: 60px !important;
+        left: 10px !important;
+        right: auto !important;
+        z-index: 99999 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: none !important;
+        animation: float 10s ease-in-out infinite !important;
+        transform: none !important;
     }
 
     .floating-logo img {
-        width: 120px;
-        height: 108px;
-        opacity: 1;
-        display: block;
-        visibility: visible;
-        object-fit: contain;
-        filter: none;
-        background: none;
-        border: none;
-        box-shadow: none;
+        width: 120px !important;
+        height: auto !important;
+        max-width: 120px !important;
+        opacity: 1 !important;
+        display: block !important;
+        visibility: visible !important;
+        object-fit: contain !important;
+        filter: none !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        transform: none !important;
     }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
     .floating-logo {
-        position: fixed;
-        top: 45px;
-        left: 10px;
-        right: auto;
-        z-index: 9999;
-        display: block;
-        visibility: visible;
-        pointer-events: none;
-        animation: float 10s ease-in-out infinite;
+        position: fixed !important;
+        top: 55px !important;
+        left: 8px !important;
+        right: auto !important;
+        z-index: 99999 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: none !important;
+        animation: float 10s ease-in-out infinite !important;
+        transform: none !important;
     }
 
     .floating-logo img {
-        width: 100px;
-        height: 90px;
-        opacity: 1;
-        display: block;
-        visibility: visible;
-        object-fit: contain;
-        filter: none;
-        background: none;
-        border: none;
-        box-shadow: none;
+        width: 100px !important;
+        height: auto !important;
+        max-width: 100px !important;
+        opacity: 1 !important;
+        display: block !important;
+        visibility: visible !important;
+        object-fit: contain !important;
+        filter: none !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        transform: none !important;
     }
 }
 
 /* Extra small screens */
-@media (max-width: 360px) {
+@media screen and (max-width: 360px) {
     .floating-logo {
-        position: fixed;
-        top: 42px;
-        left: 8px;
-        right: auto;
-        z-index: 9999;
-        display: block;
-        visibility: visible;
-        pointer-events: none;
-        animation: float 10s ease-in-out infinite;
+        position: fixed !important;
+        top: 50px !important;
+        left: 5px !important;
+        right: auto !important;
+        z-index: 99999 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: none !important;
+        animation: float 10s ease-in-out infinite !important;
+        transform: none !important;
     }
 
     .floating-logo img {
-        width: 80px;
-        height: 72px;
-        opacity: 1;
-        display: block;
-        visibility: visible;
-        object-fit: contain;
-        filter: none;
-        background: none;
-        border: none;
-        box-shadow: none;
+        width: 80px !important;
+        height: auto !important;
+        max-width: 80px !important;
+        opacity: 1 !important;
+        display: block !important;
+        visibility: visible !important;
+        object-fit: contain !important;
+        filter: none !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        transform: none !important;
     }
 }
 

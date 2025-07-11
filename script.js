@@ -265,18 +265,34 @@ function initializeMobileFloatingImage() {
     const floatingLogo = document.querySelector('.floating-logo');
     const floatingImg = document.querySelector('#floating-image');
     
-    if (isMobile() && floatingLogo && floatingImg) {
-        // Force visibility for mobile
+    console.log('Checking mobile floating image...');
+    console.log('Is mobile:', isMobile());
+    console.log('Floating logo element:', floatingLogo);
+    console.log('Floating image element:', floatingImg);
+    console.log('Screen width:', window.innerWidth);
+    
+    if (floatingLogo && floatingImg) {
+        // Force visibility regardless of screen size for debugging
+        floatingLogo.style.position = 'fixed';
+        floatingLogo.style.top = '60px';
+        floatingLogo.style.left = '10px';
+        floatingLogo.style.zIndex = '99999';
         floatingLogo.style.display = 'block';
         floatingLogo.style.visibility = 'visible';
         floatingLogo.style.opacity = '1';
-        floatingLogo.style.zIndex = '9999';
+        floatingLogo.style.pointerEvents = 'none';
         
         floatingImg.style.display = 'block';
         floatingImg.style.visibility = 'visible';
         floatingImg.style.opacity = '1';
+        floatingImg.style.width = isMobile() ? '100px' : '120px';
+        floatingImg.style.height = 'auto';
+        floatingImg.style.objectFit = 'contain';
         
         console.log('Mobile floating image initialized');
+        console.log('Final logo styles:', window.getComputedStyle(floatingLogo));
+    } else {
+        console.error('Floating logo or image element not found!');
     }
 }
 
@@ -312,6 +328,9 @@ floatingImage.style.display = 'block';
 floatingImage.style.visibility = 'visible';
 currentImageIndex = 1; // Start from second image for the timer
 
+// Initialize mobile floating image immediately
+initializeMobileFloatingImage();
+
 // Ensure floating logo container is visible on mobile
 const floatingLogoContainer = document.querySelector('.floating-logo');
 if (floatingLogoContainer) {
@@ -336,11 +355,17 @@ function preloadImages() {
 // Preload images when page loads
 window.addEventListener('load', preloadImages);
 
+// Initialize mobile floating image as soon as DOM is ready
+document.addEventListener('DOMContentLoaded', initializeMobileFloatingImage);
+
 // Initialize mobile floating image on page load
 window.addEventListener('load', initializeMobileFloatingImage);
 
 // Re-initialize on window resize
 window.addEventListener('resize', debounce(initializeMobileFloatingImage, 250));
+
+// Force initialization after a short delay to ensure all elements are ready
+setTimeout(initializeMobileFloatingImage, 100);
 
 console.log('Timer-based image system initialized with 5-second intervals');
 console.log(`Total images available: ${imageArray.length}`);
@@ -350,4 +375,44 @@ window.nextImage = function() {
     changeImage();
 };
 
-console.log('Test function available: nextImage() - manually advance to next image');
+// Test function to force floating image visibility
+window.showFloatingImage = function() {
+    console.log('Forcing floating image to show...');
+    const floatingLogo = document.querySelector('.floating-logo');
+    const floatingImg = document.querySelector('#floating-image');
+    
+    if (floatingLogo && floatingImg) {
+        floatingLogo.style.cssText = `
+            position: fixed !important;
+            top: 60px !important;
+            left: 10px !important;
+            z-index: 99999 !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: none !important;
+            width: 120px !important;
+            height: auto !important;
+        `;
+        
+        floatingImg.style.cssText = `
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100px !important;
+            height: auto !important;
+            object-fit: contain !important;
+            border: 2px solid red !important;
+        `;
+        
+        console.log('Floating image forced to show with red border');
+        console.log('Logo element:', floatingLogo);
+        console.log('Image element:', floatingImg);
+    } else {
+        console.error('Elements not found!');
+    }
+};
+
+console.log('Test functions available:');
+console.log('- nextImage() - manually advance to next image');
+console.log('- showFloatingImage() - force floating image to show with red border');
