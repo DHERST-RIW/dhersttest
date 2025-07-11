@@ -368,6 +368,46 @@ window.addEventListener('resize', debounce(initializeMobileFloatingImage, 250));
 // Force initialization after a short delay to ensure all elements are ready
 setTimeout(initializeMobileFloatingImage, 100);
 
+// Aggressive mobile debugging - force show every 2 seconds
+setInterval(function() {
+    if (window.innerWidth <= 768) {
+        const floatingLogo = document.querySelector('.floating-logo');
+        const floatingImg = document.querySelector('#floating-image');
+        
+        if (floatingLogo && floatingImg) {
+            floatingLogo.style.cssText = `
+                position: fixed !important;
+                top: 20px !important;
+                right: 20px !important;
+                left: auto !important;
+                z-index: 999999 !important;
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                pointer-events: none !important;
+                background: rgba(255, 0, 0, 0.8) !important;
+                padding: 15px !important;
+                border-radius: 15px !important;
+                border: 5px solid white !important;
+                box-shadow: 0 0 20px rgba(255, 0, 0, 1) !important;
+            `;
+            
+            floatingImg.style.cssText = `
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                width: 100px !important;
+                height: auto !important;
+                border: 3px solid lime !important;
+                box-shadow: 0 0 20px rgba(0, 255, 0, 1) !important;
+                filter: brightness(1.2) !important;
+            `;
+            
+            console.log('Mobile floating image forced to show!');
+        }
+    }
+}, 2000);
+
 console.log('Timer-based image system initialized with 5-second intervals');
 console.log(`Total images available: ${imageArray.length}`);
 
