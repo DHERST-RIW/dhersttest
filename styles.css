@@ -39,8 +39,8 @@ body {
 }
 
 .floating-logo img {
-    width: 700px;
-    height: 630px;
+    width: 1200px !important;
+    height: 1080px !important;
     object-fit: contain;
     transition: opacity 0.3s ease-in-out;
     opacity: 1 !important;
@@ -65,8 +65,8 @@ body {
     }
 
     .floating-logo img {
-        width: 800px;
-        height: 720px;
+        width: 1400px !important;
+        height: 1260px !important;
     }
 }
 
@@ -78,8 +78,29 @@ body {
     }
 
     .floating-logo img {
-        width: 900px;
-        height: 810px;
+        width: 1600px !important;
+        height: 1440px !important;
+    }
+}
+
+/* Force desktop sizes - override any JavaScript inline styles */
+@media screen and (min-width: 769px) {
+    .floating-logo img {
+        width: 1200px !important;
+        height: 1080px !important;
+        max-width: none !important;
+        max-height: none !important;
+    }
+}
+
+/* Ultra specific rule to ensure huge desktop images */
+@media screen and (min-width: 769px) {
+    body .floating-logo img,
+    #floating-image {
+        width: 1200px !important;
+        height: 1080px !important;
+        min-width: 1200px !important;
+        min-height: 1080px !important;
     }
 }
 

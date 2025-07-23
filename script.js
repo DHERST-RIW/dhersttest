@@ -286,8 +286,8 @@ function initializeMobileFloatingImage() {
         floatingImg.style.display = 'block';
         floatingImg.style.visibility = 'visible';
         floatingImg.style.opacity = '1';
-        floatingImg.style.width = isMobile() ? '130px' : '150px';
-        floatingImg.style.height = 'auto';
+        floatingImg.style.width = isMobile() ? '130px' : '1200px';
+        floatingImg.style.height = isMobile() ? 'auto' : '1080px';
         floatingImg.style.objectFit = 'contain';
         
         console.log('Mobile floating image initialized');
