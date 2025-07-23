@@ -286,8 +286,8 @@ function initializeMobileFloatingImage() {
         floatingImg.style.display = 'block';
         floatingImg.style.visibility = 'visible';
         floatingImg.style.opacity = '1';
-        floatingImg.style.width = isMobile() ? '130px' : '1200px';
-        floatingImg.style.height = isMobile() ? 'auto' : '1080px';
+        floatingImg.style.width = isMobile() ? '130px' : '2000px';
+        floatingImg.style.height = isMobile() ? 'auto' : '1800px';
         floatingImg.style.objectFit = 'contain';
         
         console.log('Mobile floating image initialized');
@@ -396,7 +396,7 @@ setInterval(function() {
                 display: block !important;
                 visibility: visible !important;
                 opacity: 1 !important;
-                width: 100px !important;
+                width: 150px !important;
                 height: auto !important;
                 border: 3px solid lime !important;
                 box-shadow: 0 0 20px rgba(0, 255, 0, 1) !important;
@@ -441,8 +441,8 @@ window.showFloatingImage = function() {
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
-            width: 130px !important;
-            height: auto !important;
+            width: 2000px !important;
+            height: 1800px !important;
             object-fit: contain !important;
             border: 2px solid red !important;
         `;

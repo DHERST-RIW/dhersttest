@@ -39,8 +39,8 @@ body {
 }
 
 .floating-logo img {
-    width: 1200px !important;
-    height: 1080px !important;
+    width: 2000px !important;
+    height: 1800px !important;
     object-fit: contain;
     transition: opacity 0.3s ease-in-out;
     opacity: 1 !important;
@@ -65,8 +65,8 @@ body {
     }
 
     .floating-logo img {
-        width: 1400px !important;
-        height: 1260px !important;
+        width: 2200px !important;
+        height: 1980px !important;
     }
 }
 
@@ -78,16 +78,16 @@ body {
     }
 
     .floating-logo img {
-        width: 1600px !important;
-        height: 1440px !important;
+        width: 2400px !important;
+        height: 2160px !important;
     }
 }
 
 /* Force desktop sizes - override any JavaScript inline styles */
 @media screen and (min-width: 769px) {
     .floating-logo img {
-        width: 1200px !important;
-        height: 1080px !important;
+        width: 2000px !important;
+        height: 1800px !important;
         max-width: none !important;
         max-height: none !important;
     }
@@ -97,10 +97,25 @@ body {
 @media screen and (min-width: 769px) {
     body .floating-logo img,
     #floating-image {
-        width: 1200px !important;
-        height: 1080px !important;
-        min-width: 1200px !important;
-        min-height: 1080px !important;
+        width: 2000px !important;
+        height: 1800px !important;
+        min-width: 2000px !important;
+        min-height: 1800px !important;
+    }
+}
+
+/* SUPER AGGRESSIVE RULE - OVERRIDE EVERYTHING FOR DESKTOP */
+@media screen and (min-width: 769px) {
+    html body .floating-logo img[id="floating-image"],
+    html body div.floating-logo img,
+    html body #floating-image,
+    img#floating-image {
+        width: 2000px !important;
+        height: 1800px !important;
+        min-width: 2000px !important;
+        min-height: 1800px !important;
+        max-width: none !important;
+        max-height: none !important;
     }
 }
 
