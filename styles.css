@@ -39,8 +39,8 @@ body {
 }
 
 .floating-logo img {
-    width: 550px;
-    height: 498px;
+    width: 700px;
+    height: 630px;
     object-fit: contain;
     transition: opacity 0.3s ease-in-out;
     opacity: 1 !important;
@@ -54,6 +54,32 @@ body {
     }
     50% {
         transform: translateY(-2px);
+    }
+}
+
+/* Large Desktop screens - make floating images even bigger */
+@media screen and (min-width: 1200px) {
+    .floating-logo {
+        top: 30px;
+        right: 30px;
+    }
+
+    .floating-logo img {
+        width: 800px;
+        height: 720px;
+    }
+}
+
+/* Extra Large Desktop screens */
+@media screen and (min-width: 1600px) {
+    .floating-logo {
+        top: 40px;
+        right: 40px;
+    }
+
+    .floating-logo img {
+        width: 900px;
+        height: 810px;
     }
 }
 
