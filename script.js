@@ -291,9 +291,9 @@ function initializeMobileFloatingImage() {
             floatingImg.style.width = '130px';
             floatingImg.style.height = 'auto';
         } else {
-            // MASSIVE DESKTOP SIZE
-            floatingImg.style.width = '1000px';
-            floatingImg.style.height = '900px';
+            // ULTIMATE MASSIVE DESKTOP SIZE
+            floatingImg.style.width = '1500px';
+            floatingImg.style.height = '1350px';
         }
         floatingImg.style.objectFit = 'contain';
         
@@ -409,8 +409,8 @@ window.showFloatingImage = function() {
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
-            width: 1000px !important;
-            height: 900px !important;
+            width: 1500px !important;
+            height: 1350px !important;
             object-fit: contain !important;
         `;
         
