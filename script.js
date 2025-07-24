@@ -411,7 +411,6 @@ window.showFloatingImage = function() {
             width: auto !important;
             height: auto !important;
             object-fit: contain !important;
-            border: 2px solid red !important;
         `;
         
         console.log('Floating image forced to show with red border');

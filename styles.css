@@ -165,9 +165,6 @@ body {
         pointer-events: none !important;
         animation: float 10s ease-in-out infinite !important;
         transform: none !important;
-        background: rgba(255, 0, 0, 0.2) !important;
-        padding: 5px !important;
-        border-radius: 5px !important;
     }
 
     .floating-logo img {
@@ -179,9 +176,6 @@ body {
         visibility: visible !important;
         object-fit: contain !important;
         filter: none !important;
-        background: rgba(0, 255, 0, 0.1) !important;
-        border: 2px solid red !important;
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5) !important;
         transform: none !important;
     }
 }
@@ -199,9 +193,6 @@ body {
         pointer-events: none !important;
         animation: float 10s ease-in-out infinite !important;
         transform: none !important;
-        background: rgba(0, 255, 0, 0.3) !important;
-        padding: 5px !important;
-        border-radius: 5px !important;
     }
 
     .floating-logo img {
@@ -213,9 +204,6 @@ body {
         visibility: visible !important;
         object-fit: contain !important;
         filter: none !important;
-        background: rgba(0, 0, 255, 0.1) !important;
-        border: 2px solid blue !important;
-        box-shadow: 0 0 10px rgba(0, 0, 255, 0.5) !important;
         transform: none !important;
     }
 }
@@ -234,9 +222,6 @@ body {
         pointer-events: none !important;
         animation: float 10s ease-in-out infinite !important;
         transform: none !important;
-        background: rgba(255, 255, 0, 0.3) !important;
-        padding: 5px !important;
-        border-radius: 5px !important;
     }
 
     .floating-logo img {
@@ -248,9 +233,6 @@ body {
         visibility: visible !important;
         object-fit: contain !important;
         filter: none !important;
-        background: rgba(255, 0, 255, 0.1) !important;
-        border: 2px solid yellow !important;
-        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5) !important;
         transform: none !important;
     }
 }
@@ -1016,10 +998,6 @@ body {
         right: 10px !important;
         top: 60px !important;
         left: auto !important;
-        background: rgba(255, 0, 0, 0.5) !important;
-        padding: 10px !important;
-        border-radius: 10px !important;
-        border: 3px solid white !important;
     }
     
     .floating-logo img {
@@ -1028,8 +1006,6 @@ body {
         opacity: 1 !important;
         width: 120px !important;
         height: auto !important;
-        border: 2px solid lime !important;
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.8) !important;
     }
 }
 
@@ -1045,11 +1021,6 @@ body {
         visibility: visible !important;
         opacity: 1 !important;
         pointer-events: none !important;
-        background: rgba(255, 0, 0, 0.8) !important;
-        padding: 15px !important;
-        border-radius: 15px !important;
-        border: 5px solid white !important;
-        box-shadow: 0 0 20px rgba(255, 0, 0, 1) !important;
         animation: pulse 2s infinite !important;
     }
     
@@ -1059,9 +1030,6 @@ body {
         opacity: 1 !important;
         width: 100px !important;
         height: auto !important;
-        border: 3px solid lime !important;
-        box-shadow: 0 0 20px rgba(0, 255, 0, 1) !important;
-        filter: brightness(1.2) !important;
     }
 }
 
