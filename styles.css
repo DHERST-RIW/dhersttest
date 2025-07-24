@@ -39,8 +39,7 @@ body {
 }
 
 .floating-logo img {
-    width: 2000px !important;
-    height: 1800px !important;
+    /* Remove all size constraints - let image use natural size */
     object-fit: contain;
     transition: opacity 0.3s ease-in-out;
     opacity: 1 !important;
@@ -65,8 +64,7 @@ body {
     }
 
     .floating-logo img {
-        width: 2200px !important;
-        height: 1980px !important;
+        /* Let image use natural size on large screens */
     }
 }
 
@@ -78,42 +76,43 @@ body {
     }
 
     .floating-logo img {
-        width: 2400px !important;
-        height: 2160px !important;
+        /* Let image use natural size on extra large screens */
     }
 }
 
 /* Force desktop sizes - override any JavaScript inline styles */
 @media screen and (min-width: 769px) {
     .floating-logo img {
-        width: 2000px !important;
-        height: 1800px !important;
+        /* Remove all size constraints for desktop - use natural image size */
         max-width: none !important;
         max-height: none !important;
     }
 }
 
-/* Ultra specific rule to ensure huge desktop images */
+/* Ultra specific rule - let images use natural size on desktop */
 @media screen and (min-width: 769px) {
     body .floating-logo img,
     #floating-image {
-        width: 2000px !important;
-        height: 1800px !important;
-        min-width: 2000px !important;
-        min-height: 1800px !important;
+        /* Remove all size constraints - use natural image dimensions */
+        width: auto !important;
+        height: auto !important;
+        min-width: unset !important;
+        min-height: unset !important;
+        max-width: none !important;
+        max-height: none !important;
     }
 }
 
-/* SUPER AGGRESSIVE RULE - OVERRIDE EVERYTHING FOR DESKTOP */
+/* SUPER AGGRESSIVE RULE - REMOVE ALL SIZE CONSTRAINTS FOR DESKTOP */
 @media screen and (min-width: 769px) {
     html body .floating-logo img[id="floating-image"],
     html body div.floating-logo img,
     html body #floating-image,
     img#floating-image {
-        width: 2000px !important;
-        height: 1800px !important;
-        min-width: 2000px !important;
-        min-height: 1800px !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: unset !important;
+        min-height: unset !important;
         max-width: none !important;
         max-height: none !important;
     }
