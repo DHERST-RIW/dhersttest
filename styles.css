@@ -65,17 +65,17 @@ body {
     }
 }
 
-/* MASSIVE DESKTOP IMAGES - NUCLEAR OPTION */
+/* GOOD SIZE DESKTOP IMAGES */
 @media screen and (min-width: 769px) {
     .floating-logo img,
     #floating-image,
     body .floating-logo img,
     html body .floating-logo img,
     img#floating-image {
-        width: 1000px !important;
-        height: 900px !important;
-        min-width: 1000px !important;
-        min-height: 900px !important;
+        width: 400px !important;
+        height: 360px !important;
+        min-width: 400px !important;
+        min-height: 360px !important;
         max-width: none !important;
         max-height: none !important;
         display: block !important;
@@ -84,35 +84,35 @@ body {
     }
 }
 
-/* LARGE DESKTOP - EVEN BIGGER */
+/* LARGE DESKTOP - SLIGHTLY BIGGER */
 @media screen and (min-width: 1200px) {
     .floating-logo img,
     #floating-image,
     body .floating-logo img,
     html body .floating-logo img,
     img#floating-image {
-        width: 1200px !important;
-        height: 1080px !important;
-        min-width: 1200px !important;
-        min-height: 1080px !important;
+        width: 450px !important;
+        height: 405px !important;
+        min-width: 450px !important;
+        min-height: 405px !important;
     }
 }
 
-/* EXTRA LARGE DESKTOP - HUGE */
+/* EXTRA LARGE DESKTOP - BIGGER */
 @media screen and (min-width: 1600px) {
     .floating-logo img,
     #floating-image,
     body .floating-logo img,
     html body .floating-logo img,
     img#floating-image {
-        width: 1400px !important;
-        height: 1260px !important;
-        min-width: 1400px !important;
-        min-height: 1260px !important;
+        width: 500px !important;
+        height: 450px !important;
+        min-width: 500px !important;
+        min-height: 450px !important;
     }
 }
 
-/* ABSOLUTE NUCLEAR OPTION - OVERRIDE EVERYTHING */
+/* GOOD SIZE - OVERRIDE EVERYTHING */
 .floating-logo img,
 #floating-image,
 body .floating-logo img,
@@ -120,10 +120,10 @@ html body .floating-logo img,
 img#floating-image,
 div.floating-logo img,
 html body div.floating-logo img {
-    width: 800px !important;
-    height: 720px !important;
-    min-width: 800px !important;
-    min-height: 720px !important;
+    width: 400px !important;
+    height: 360px !important;
+    min-width: 400px !important;
+    min-height: 360px !important;
     max-width: none !important;
     max-height: none !important;
     display: block !important;
@@ -132,7 +132,7 @@ html body div.floating-logo img {
     object-fit: contain !important;
 }
 
-/* DESKTOP NUCLEAR OVERRIDE - FINAL */
+/* DESKTOP GOOD SIZE - FINAL */
 @media screen and (min-width: 769px) {
     .floating-logo img,
     #floating-image,
@@ -141,26 +141,26 @@ html body div.floating-logo img {
     img#floating-image,
     div.floating-logo img,
     html body div.floating-logo img {
-        width: 1000px !important;
-        height: 900px !important;
-        min-width: 1000px !important;
-        min-height: 900px !important;
+        width: 400px !important;
+        height: 360px !important;
+        min-width: 400px !important;
+        min-height: 360px !important;
     }
 }
 
 /* REMOVED THE 260PX RULE THAT WAS MAKING IMAGES SMALL */
 
-/* ULTIMATE NUCLEAR OPTION - MAXIMUM SPECIFICITY */
+/* PERFECT SIZE - BIG BUT NOT OVERWHELMING */
 html body div.floating-logo img#floating-image,
 html body .floating-logo img#floating-image,
 body div.floating-logo img#floating-image,
 div.floating-logo img#floating-image,
 .floating-logo img#floating-image,
 img#floating-image {
-    width: 1500px !important;
-    height: 1350px !important;
-    min-width: 1500px !important;
-    min-height: 1350px !important;
+    width: 400px !important;
+    height: 360px !important;
+    min-width: 400px !important;
+    min-height: 360px !important;
     max-width: none !important;
     max-height: none !important;
     display: block !important;
@@ -171,7 +171,7 @@ img#floating-image {
     z-index: 99999 !important;
 }
 
-/* DESKTOP ULTIMATE OVERRIDE */
+/* DESKTOP PERFECT SIZE */
 @media screen and (min-width: 769px) {
     html body div.floating-logo img#floating-image,
     html body .floating-logo img#floating-image,
@@ -179,10 +179,10 @@ img#floating-image {
     div.floating-logo img#floating-image,
     .floating-logo img#floating-image,
     img#floating-image {
-        width: 1500px !important;
-        height: 1350px !important;
-        min-width: 1500px !important;
-        min-height: 1350px !important;
+        width: 400px !important;
+        height: 360px !important;
+        min-width: 400px !important;
+        min-height: 360px !important;
     }
 }
 
