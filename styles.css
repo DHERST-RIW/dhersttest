@@ -89,7 +89,11 @@ body {
     }
 }
 
-/* Ultra specific rule - let images use natural size on desktop */
+/* 
+ * LEGACY RULE: Ultra specific rule - let images use natural size on desktop
+ * NOTE: This rule conflicts with the desktop sizing rule below (line ~122)
+ * The desktop sizing rule should take precedence due to cascade order and higher specificity
+ */
 @media screen and (min-width: 769px) {
     body .floating-logo img,
     #floating-image {
@@ -103,7 +107,11 @@ body {
     }
 }
 
-/* SUPER AGGRESSIVE RULE - REMOVE ALL SIZE CONSTRAINTS FOR DESKTOP */
+/* 
+ * LEGACY RULE: SUPER AGGRESSIVE RULE - REMOVE ALL SIZE CONSTRAINTS FOR DESKTOP
+ * NOTE: This rule conflicts with the desktop sizing rule below (line ~122)
+ * The desktop sizing rule should take precedence due to cascade order and higher specificity
+ */
 @media screen and (min-width: 769px) {
     html body .floating-logo img[id="floating-image"],
     html body div.floating-logo img,
@@ -116,6 +124,31 @@ body {
         max-width: none !important;
         max-height: none !important;
     }
+}
+
+/* 
+ * ACTIVE RULE: Desktop enlarged floating images - THIS RULE TAKES PRECEDENCE
+ * This rule intentionally overrides the legacy "auto" sizing rules above
+ * due to CSS cascade order and higher specificity.
+ * 
+ * The higher specificity selector ensures this rule wins over the legacy rules
+ * even though they all use !important declarations.
+ */
+@media screen and (min-width: 1024px) {
+  html body div.floating-logo {
+    top: 20px;
+    right: 20px;
+  }
+  /* Enhanced specificity selector to ensure this rule takes precedence */
+  html body div.floating-logo img,
+  html body .floating-logo img[id],
+  html body #floating-image.floating-logo-img {
+    width: 260px !important;   /* Desired large size for desktop */
+    height: auto !important;
+    /* Override the legacy auto sizing */
+    max-width: 260px !important;
+    min-width: 260px !important;
+  }
 }
 
 /* Mobile responsive adjustments for floating logo */
