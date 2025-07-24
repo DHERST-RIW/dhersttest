@@ -29,22 +29,31 @@ body {
     --gradient-3: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
 }
 
-/* Floating Logo */
+/* Floating Logo - MASSIVE SIZE */
 .floating-logo {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 10000;
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 99999 !important;
     animation: float 10s ease-in-out infinite;
+    width: auto !important;
+    height: auto !important;
 }
 
 .floating-logo img {
-    /* Remove all size constraints - let image use natural size */
-    object-fit: contain;
+    width: 800px !important;
+    height: 720px !important;
+    min-width: 800px !important;
+    min-height: 720px !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
     transition: opacity 0.3s ease-in-out;
     opacity: 1 !important;
-    filter: none;
-    background: none;
+    filter: none !important;
+    background: none !important;
+    display: block !important;
+    visibility: visible !important;
 }
 
 @keyframes float {
@@ -56,73 +65,86 @@ body {
     }
 }
 
-/* Large Desktop screens - make floating images even bigger */
-@media screen and (min-width: 1200px) {
-    .floating-logo {
-        top: 30px;
-        right: 30px;
-    }
-
-    .floating-logo img {
-        /* Let image use natural size on large screens */
-    }
-}
-
-/* Extra Large Desktop screens */
-@media screen and (min-width: 1600px) {
-    .floating-logo {
-        top: 40px;
-        right: 40px;
-    }
-
-    .floating-logo img {
-        /* Let image use natural size on extra large screens */
-    }
-}
-
-/* Force desktop sizes - override any JavaScript inline styles */
+/* MASSIVE DESKTOP IMAGES - NUCLEAR OPTION */
 @media screen and (min-width: 769px) {
-    .floating-logo img {
-        /* Remove all size constraints for desktop - use natural image size */
-        max-width: none !important;
-        max-height: none !important;
-    }
-}
-
-/* 
- * LEGACY RULE: Ultra specific rule - let images use natural size on desktop
- * NOTE: This rule conflicts with the desktop sizing rule below (line ~122)
- * The desktop sizing rule should take precedence due to cascade order and higher specificity
- */
-@media screen and (min-width: 769px) {
+    .floating-logo img,
+    #floating-image,
     body .floating-logo img,
-    #floating-image {
-        /* Remove all size constraints - use natural image dimensions */
-        width: auto !important;
-        height: auto !important;
-        min-width: unset !important;
-        min-height: unset !important;
+    html body .floating-logo img,
+    img#floating-image {
+        width: 1000px !important;
+        height: 900px !important;
+        min-width: 1000px !important;
+        min-height: 900px !important;
         max-width: none !important;
         max-height: none !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 }
 
-/* 
- * LEGACY RULE: SUPER AGGRESSIVE RULE - REMOVE ALL SIZE CONSTRAINTS FOR DESKTOP
- * NOTE: This rule conflicts with the desktop sizing rule below (line ~122)
- * The desktop sizing rule should take precedence due to cascade order and higher specificity
- */
-@media screen and (min-width: 769px) {
-    html body .floating-logo img[id="floating-image"],
-    html body div.floating-logo img,
-    html body #floating-image,
+/* LARGE DESKTOP - EVEN BIGGER */
+@media screen and (min-width: 1200px) {
+    .floating-logo img,
+    #floating-image,
+    body .floating-logo img,
+    html body .floating-logo img,
     img#floating-image {
-        width: auto !important;
-        height: auto !important;
-        min-width: unset !important;
-        min-height: unset !important;
-        max-width: none !important;
-        max-height: none !important;
+        width: 1200px !important;
+        height: 1080px !important;
+        min-width: 1200px !important;
+        min-height: 1080px !important;
+    }
+}
+
+/* EXTRA LARGE DESKTOP - HUGE */
+@media screen and (min-width: 1600px) {
+    .floating-logo img,
+    #floating-image,
+    body .floating-logo img,
+    html body .floating-logo img,
+    img#floating-image {
+        width: 1400px !important;
+        height: 1260px !important;
+        min-width: 1400px !important;
+        min-height: 1260px !important;
+    }
+}
+
+/* ABSOLUTE NUCLEAR OPTION - OVERRIDE EVERYTHING */
+.floating-logo img,
+#floating-image,
+body .floating-logo img,
+html body .floating-logo img,
+img#floating-image,
+div.floating-logo img,
+html body div.floating-logo img {
+    width: 800px !important;
+    height: 720px !important;
+    min-width: 800px !important;
+    min-height: 720px !important;
+    max-width: none !important;
+    max-height: none !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    object-fit: contain !important;
+}
+
+/* DESKTOP NUCLEAR OVERRIDE - FINAL */
+@media screen and (min-width: 769px) {
+    .floating-logo img,
+    #floating-image,
+    body .floating-logo img,
+    html body .floating-logo img,
+    img#floating-image,
+    div.floating-logo img,
+    html body div.floating-logo img {
+        width: 1000px !important;
+        height: 900px !important;
+        min-width: 1000px !important;
+        min-height: 900px !important;
     }
 }
 

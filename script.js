@@ -286,13 +286,14 @@ function initializeMobileFloatingImage() {
         floatingImg.style.display = 'block';
         floatingImg.style.visibility = 'visible';
         floatingImg.style.opacity = '1';
-        // Only set size for mobile, let desktop use natural image size
+        // FORCE MASSIVE SIZE FOR DESKTOP
         if (isMobile()) {
             floatingImg.style.width = '130px';
             floatingImg.style.height = 'auto';
         } else {
-            floatingImg.style.width = '260px';   // match CSS desktop width
-            floatingImg.style.height = 'auto';
+            // MASSIVE DESKTOP SIZE
+            floatingImg.style.width = '1000px';
+            floatingImg.style.height = '900px';
         }
         floatingImg.style.objectFit = 'contain';
         
@@ -408,8 +409,8 @@ window.showFloatingImage = function() {
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
-            width: auto !important;
-            height: auto !important;
+            width: 1000px !important;
+            height: 900px !important;
             object-fit: contain !important;
         `;
         
