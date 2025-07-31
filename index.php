@@ -1,30 +1,22 @@
 <?php
-// PHP-based image selection system
-// No JavaScript timers, intervals, or countdowns
-
-// Function to get selected image from file
 function getSelectedImage() {
     $configFile = 'config/selected_image.json';
-    
-    // Create config directory if it doesn't exist
+
     if (!file_exists('config')) {
         mkdir('config', 0755, true);
     }
-    
-    // Read from config file or return default
+
     if (file_exists($configFile)) {
         $data = json_decode(file_get_contents($configFile), true);
         if ($data && isset($data['image_number'])) {
             $imageNumber = (int)$data['image_number'];
-            return max(1, min(50, $imageNumber)); // Ensure valid range
+            return max(1, min(50, $imageNumber));
         }
     }
-    
-    // Default to image 1
+
     return 1;
 }
 
-// Get the current selected image
 $selectedImage = getSelectedImage();
 ?>
 <!DOCTYPE html>
@@ -39,7 +31,6 @@ $selectedImage = getSelectedImage();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Floating image - set directly by PHP -->
     <div class="floating-logo">
         <img id="floating-image" src="images/<?php echo $selectedImage; ?>.png" alt="Papua New Guinea Coat of Arms" />
     </div>
@@ -150,9 +141,7 @@ $selectedImage = getSelectedImage();
         </div>
     </footer>
 
-    <!-- PURE CSS/HTML - NO JAVASCRIPT TIMERS OR INTERVALS -->
     <script>
-        // Only basic navigation - NO timers, intervals, or countdowns
         const mobileMenu = document.getElementById('mobile-menu');
         const navMenu = document.querySelector('.nav-menu');
 
@@ -169,8 +158,6 @@ $selectedImage = getSelectedImage();
                 });
             });
         }
-
-        // Basic scroll effect - NO timers
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (navbar) {
@@ -183,8 +170,6 @@ $selectedImage = getSelectedImage();
                 }
             }
         });
-
-        // Mobile floating image setup - NO timers
         document.addEventListener('DOMContentLoaded', () => {
             const floatingLogo = document.querySelector('.floating-logo');
             const floatingImg = document.querySelector('#floating-image');

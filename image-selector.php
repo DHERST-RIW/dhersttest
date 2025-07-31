@@ -1,43 +1,35 @@
 <?php
-// PHP Image Selector - No JavaScript timers or intervals
-
-// Function to save selected image
 function saveSelectedImage($imageNumber) {
     $configFile = 'config/selected_image.json';
-    
-    // Create config directory if it doesn't exist
+
     if (!file_exists('config')) {
         mkdir('config', 0755, true);
     }
-    
-    // Validate image number
+
     $imageNumber = max(1, min(50, (int)$imageNumber));
-    
-    // Save to JSON file
+
     $data = [
         'image_number' => $imageNumber,
         'updated_at' => date('Y-m-d H:i:s'),
         'timestamp' => time()
     ];
-    
+
     return file_put_contents($configFile, json_encode($data, JSON_PRETTY_PRINT));
 }
 
-// Function to get current selected image
 function getCurrentSelectedImage() {
     $configFile = 'config/selected_image.json';
-    
+
     if (file_exists($configFile)) {
         $data = json_decode(file_get_contents($configFile), true);
         if ($data && isset($data['image_number'])) {
             return (int)$data['image_number'];
         }
     }
-    
-    return 1; // Default
+
+    return 1;
 }
 
-// Handle form submission
 $message = '';
 $messageType = '';
 
@@ -60,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     }
 }
 
-// Get current image
 $currentImage = getCurrentSelectedImage();
 ?>
 <!DOCTYPE html>
@@ -178,30 +169,21 @@ $currentImage = getCurrentSelectedImage();
                     <li>Preview your selection</li>
                     <li>Click "Apply Selection" to save it</li>
                     <li>The main page will display your chosen image immediately</li>
-                    <li>No automatic countdown - image stays fixed until you change it</li>
+                    <li>Image stays fixed until you change it</li>
                 </ul>
             </div>
         </div>
 
-        <div class="debug-info" style="margin-top: 2rem; padding: 1rem; background: #f0f0f0; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
-            <h4>Debug Information:</h4>
-            <p><strong>Current Image:</strong> <?php echo $currentImage; ?></p>
-            <p><strong>Config File:</strong> <?php echo file_exists('config/selected_image.json') ? 'EXISTS' : 'NOT FOUND'; ?></p>
-            <p><strong>Config Directory:</strong> <?php echo is_dir('config') ? 'EXISTS' : 'NOT FOUND'; ?></p>
-            <p><strong>Server Time:</strong> <?php echo date('Y-m-d H:i:s'); ?></p>
-        </div>
+
     </div>
 
-    <!-- MINIMAL JAVASCRIPT - NO TIMERS OR INTERVALS -->
     <script>
-        // Preview functionality - NO timers
         function updatePreview(imageNumber) {
             if (imageNumber >= 1 && imageNumber <= 50) {
                 document.getElementById('preview-display').src = `images/${imageNumber}.png`;
                 document.getElementById('preview-info').textContent = `Image ${imageNumber}.png`;
                 document.getElementById('preview-file').textContent = `images/${imageNumber}.png`;
-                
-                // Update active button
+
                 document.querySelectorAll('.quick-btn').forEach(btn => {
                     btn.classList.remove('active');
                     if (parseInt(btn.dataset.image) === imageNumber) {
@@ -210,31 +192,21 @@ $currentImage = getCurrentSelectedImage();
                 });
             }
         }
-
-        // Reset function
         function resetToDefault() {
             document.getElementById('image_number').value = 1;
             updatePreview(1);
         }
-
-        // Initialize when DOM loads
         document.addEventListener('DOMContentLoaded', () => {
             const imageInput = document.getElementById('image_number');
             const previewBtn = document.getElementById('preview-btn');
-
-            // Input change
             imageInput.addEventListener('input', (e) => {
                 const value = parseInt(e.target.value);
                 updatePreview(value);
             });
-
-            // Preview button
             previewBtn.addEventListener('click', () => {
                 const value = parseInt(imageInput.value);
                 updatePreview(value);
             });
-
-            // Quick select buttons
             document.querySelectorAll('.quick-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const imageNumber = parseInt(e.target.dataset.image);
