@@ -1,0 +1,27 @@
+# Enable PHP processing
+AddType application/x-httpd-php .php
+
+# Set default index file
+DirectoryIndex index.php index.html
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Redirect index.html to index.php if someone tries to access it
+RewriteRule ^index\.html$ index.php [R=301,L]
+
+# Security: Prevent access to config directory from web
+<Files "config/*">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Security: Prevent access to .json files directly
+<Files "*.json">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Enable error reporting for debugging (remove in production)
+php_flag display_errors On
+php_value error_reporting E_ALL

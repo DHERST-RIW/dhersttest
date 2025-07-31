@@ -1,3 +1,32 @@
+<?php
+// PHP-based image selection system
+// No JavaScript timers, intervals, or countdowns
+
+// Function to get selected image from file
+function getSelectedImage() {
+    $configFile = 'config/selected_image.json';
+    
+    // Create config directory if it doesn't exist
+    if (!file_exists('config')) {
+        mkdir('config', 0755, true);
+    }
+    
+    // Read from config file or return default
+    if (file_exists($configFile)) {
+        $data = json_decode(file_get_contents($configFile), true);
+        if ($data && isset($data['image_number'])) {
+            $imageNumber = (int)$data['image_number'];
+            return max(1, min(50, $imageNumber)); // Ensure valid range
+        }
+    }
+    
+    // Default to image 1
+    return 1;
+}
+
+// Get the current selected image
+$selectedImage = getSelectedImage();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +39,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Floating image - set directly by PHP -->
     <div class="floating-logo">
-        <img id="floating-image" src="images/1.png" alt="Papua New Guinea Coat of Arms" />
+        <img id="floating-image" src="images/<?php echo $selectedImage; ?>.png" alt="Papua New Guinea Coat of Arms" />
     </div>
 
     <nav class="navbar">
@@ -120,27 +150,9 @@
         </div>
     </footer>
 
+    <!-- PURE CSS/HTML - NO JAVASCRIPT TIMERS OR INTERVALS -->
     <script>
-        // COMPLETELY CLEAN - NO TIMERS, NO INTERVALS, NO COUNTDOWNS
-        
-        // Get selected image from localStorage or default to 1
-        function getSelectedImage() {
-            const saved = localStorage.getItem('selectedImage');
-            const imageNumber = saved ? parseInt(saved) : 1;
-            return Math.max(1, Math.min(50, imageNumber));
-        }
-
-        // Set the image source immediately on page load
-        function setFloatingImage() {
-            const floatingImage = document.getElementById('floating-image');
-            const selectedImage = getSelectedImage();
-            if (floatingImage) {
-                floatingImage.src = `images/${selectedImage}.png`;
-                console.log(`Displaying image: ${selectedImage}.png`);
-            }
-        }
-
-        // Mobile navigation
+        // Only basic navigation - NO timers, intervals, or countdowns
         const mobileMenu = document.getElementById('mobile-menu');
         const navMenu = document.querySelector('.nav-menu');
 
@@ -158,7 +170,7 @@
             });
         }
 
-        // Navbar scroll effect
+        // Basic scroll effect - NO timers
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (navbar) {
@@ -172,11 +184,8 @@
             }
         });
 
-        // Initialize everything when DOM is ready
+        // Mobile floating image setup - NO timers
         document.addEventListener('DOMContentLoaded', () => {
-            setFloatingImage();
-            
-            // Mobile floating image setup
             const floatingLogo = document.querySelector('.floating-logo');
             const floatingImg = document.querySelector('#floating-image');
             
@@ -202,18 +211,6 @@
                 }
                 floatingImg.style.objectFit = 'contain';
             }
-        });
-
-        // Listen for page visibility changes (when user returns to tab)
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                setFloatingImage();
-            }
-        });
-
-        // Listen for window focus (when user clicks on tab)
-        window.addEventListener('focus', () => {
-            setFloatingImage();
         });
     </script>
 </body>
