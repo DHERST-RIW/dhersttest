@@ -232,30 +232,161 @@ function initializeMobileFloatingImage() {
     }
 }
 
-const floatingImage = document.getElementById('floating-image');
+class FloatingImageManager {
+    constructor() {
+        this.settings = this.loadSettings();
+        this.floatingImage = document.getElementById('floating-image');
+        this.imageArray = this.generateImageArray();
+        this.currentImageIndex = this.getStartingIndex();
+        this.intervalTimer = null;
+        this.isPaused = false;
+        this.init();
+    }
 
-const imageArray = [];
-for (let i = 1; i <= 50; i++) {
-    imageArray.push(`images/${i}.png`);
+    loadSettings() {
+        const defaultSettings = {
+            intervalType: 'minutes',
+            intervalValue: 10,
+            startImage: 'first',
+            specificImage: 1,
+            startRange: 1,
+            endRange: 50,
+            autoStart: true,
+            loopImages: true,
+            fadeTransition: true,
+            pauseOnHover: false
+        };
+
+        const saved = localStorage.getItem('dherstImageSettings');
+        return saved ? { ...defaultSettings, ...JSON.parse(saved) } : defaultSettings;
+    }
+
+    generateImageArray() {
+        const array = [];
+        for (let i = this.settings.startRange; i <= this.settings.endRange; i++) {
+            array.push(`images/${i}.png`);
+        }
+        return array;
+    }
+
+    getStartingIndex() {
+        switch(this.settings.startImage) {
+            case 'random':
+                return Math.floor(Math.random() * this.imageArray.length);
+            case 'specific':
+                const specificIndex = this.settings.specificImage - this.settings.startRange;
+                return Math.max(0, Math.min(specificIndex, this.imageArray.length - 1));
+            default:
+                return 0;
+        }
+    }
+
+    getIntervalInMs() {
+        const value = this.settings.intervalValue;
+        switch(this.settings.intervalType) {
+            case 'seconds': return value * 1000;
+            case 'minutes': return value * 60 * 1000;
+            case 'hours': return value * 60 * 60 * 1000;
+            case 'days': return value * 24 * 60 * 60 * 1000;
+            case 'custom': return value;
+            default: return 10 * 60 * 1000;
+        }
+    }
+
+    init() {
+        this.setupInitialImage();
+        this.setupHoverEvents();
+        this.preloadImages();
+
+        if (this.settings.autoStart) {
+            this.startImageRotation();
+        }
+    }
+
+    setupInitialImage() {
+        this.floatingImage.src = this.imageArray[this.currentImageIndex];
+        this.floatingImage.style.opacity = '1';
+        this.floatingImage.style.display = 'block';
+        this.floatingImage.style.visibility = 'visible';
+    }
+
+    setupHoverEvents() {
+        if (this.settings.pauseOnHover) {
+            const floatingLogo = document.querySelector('.floating-logo');
+            if (floatingLogo) {
+                floatingLogo.addEventListener('mouseenter', () => {
+                    this.pauseRotation();
+                });
+                floatingLogo.addEventListener('mouseleave', () => {
+                    this.resumeRotation();
+                });
+            }
+        }
+    }
+
+    changeImage() {
+        if (this.isPaused) return;
+
+        if (this.settings.fadeTransition) {
+            this.floatingImage.style.opacity = '0.3';
+        }
+
+        setTimeout(() => {
+            this.floatingImage.src = this.imageArray[this.currentImageIndex];
+            if (this.settings.fadeTransition) {
+                this.floatingImage.style.opacity = '1';
+            }
+            this.moveToNextImage();
+        }, this.settings.fadeTransition ? 150 : 0);
+    }
+
+    moveToNextImage() {
+        this.currentImageIndex++;
+        if (this.currentImageIndex >= this.imageArray.length) {
+            if (this.settings.loopImages) {
+                this.currentImageIndex = 0;
+            } else {
+                this.currentImageIndex = this.imageArray.length - 1;
+                this.stopImageRotation();
+            }
+        }
+    }
+
+    startImageRotation() {
+        if (this.intervalTimer) {
+            clearInterval(this.intervalTimer);
+        }
+
+        const intervalMs = this.getIntervalInMs();
+        this.intervalTimer = setInterval(() => {
+            this.changeImage();
+        }, intervalMs);
+    }
+
+    stopImageRotation() {
+        if (this.intervalTimer) {
+            clearInterval(this.intervalTimer);
+            this.intervalTimer = null;
+        }
+    }
+
+    pauseRotation() {
+        this.isPaused = true;
+    }
+
+    resumeRotation() {
+        this.isPaused = false;
+    }
+
+    preloadImages() {
+        this.imageArray.forEach(imageName => {
+            const img = new Image();
+            img.src = imageName;
+        });
+    }
 }
 
-let currentImageIndex = 0;
-
-function changeImage() {
-    floatingImage.style.opacity = '1';
-
-    setTimeout(() => {
-        floatingImage.src = imageArray[currentImageIndex];
-        floatingImage.style.opacity = '1';
-        currentImageIndex = (currentImageIndex + 1) % imageArray.length;
-    }, 150);
-}
-
-floatingImage.src = imageArray[0];
-floatingImage.style.opacity = '1';
-floatingImage.style.display = 'block';
-floatingImage.style.visibility = 'visible';
-currentImageIndex = 1;
+const floatingImageManager = new FloatingImageManager();
 
 initializeMobileFloatingImage();
 
@@ -266,18 +397,6 @@ if (floatingLogoContainer) {
     floatingLogoContainer.style.opacity = '1';
 }
 
-setInterval(() => {
-    changeImage();
-}, 10000);
-
-function preloadImages() {
-    imageArray.forEach(imageName => {
-        const img = new Image();
-        img.src = imageName;
-    });
-}
-
-window.addEventListener('load', preloadImages);
 document.addEventListener('DOMContentLoaded', initializeMobileFloatingImage);
 window.addEventListener('load', initializeMobileFloatingImage);
 window.addEventListener('resize', debounce(initializeMobileFloatingImage, 250));

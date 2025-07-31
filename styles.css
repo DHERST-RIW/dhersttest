@@ -203,6 +203,20 @@ body {
     color: #6366f1;
 }
 
+.settings-link {
+    background: var(--gradient-2) !important;
+    color: white !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 20px !important;
+    transition: all 0.3s ease !important;
+}
+
+.settings-link:hover {
+    background: var(--secondary-color) !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;

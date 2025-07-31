@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHERST Settings - Image Display Configuration</title>
+    <link rel="icon" type="image/png" href="dherst_logo.png">
+    <link rel="stylesheet" href="settings.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="dherst_logo.png" alt="DHERST Logo" class="nav-logo-img">
+                <span class="nav-title">Settings</span>
+            </div>
+            <div class="nav-actions">
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="settings-container">
+        <div class="settings-header">
+            <h1>Image Display Settings</h1>
+            <p>Customize how the floating images appear on your website</p>
+        </div>
+
+        <div class="settings-grid">
+            <div class="settings-card">
+                <div class="card-header">
+                    <i class="fas fa-clock"></i>
+                    <h3>Display Interval</h3>
+                </div>
+                <div class="card-content">
+                    <div class="interval-options">
+                        <div class="radio-group">
+                            <input type="radio" id="seconds" name="interval-type" value="seconds">
+                            <label for="seconds">Seconds</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="minutes" name="interval-type" value="minutes" checked>
+                            <label for="minutes">Minutes</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="hours" name="interval-type" value="hours">
+                            <label for="hours">Hours</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="days" name="interval-type" value="days">
+                            <label for="days">Days</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="custom" name="interval-type" value="custom">
+                            <label for="custom">Custom (ms)</label>
+                        </div>
+                    </div>
+                    
+                    <div class="interval-input">
+                        <label for="interval-value">Interval Value:</label>
+                        <input type="number" id="interval-value" min="1" max="365" value="10" step="1">
+                        <span class="interval-unit">minutes</span>
+                    </div>
+
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-value="5" data-type="seconds">5 sec</button>
+                        <button class="preset-btn" data-value="10" data-type="seconds">10 sec</button>
+                        <button class="preset-btn" data-value="30" data-type="seconds">30 sec</button>
+                        <button class="preset-btn active" data-value="10" data-type="minutes">10 min</button>
+                        <button class="preset-btn" data-value="1" data-type="hours">1 hour</button>
+                        <button class="preset-btn" data-value="1" data-type="days">1 day</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <div class="card-header">
+                    <i class="fas fa-play"></i>
+                    <h3>Starting Image</h3>
+                </div>
+                <div class="card-content">
+                    <div class="start-options">
+                        <div class="radio-group">
+                            <input type="radio" id="start-first" name="start-image" value="first" checked>
+                            <label for="start-first">Start from first image (1.png)</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="start-random" name="start-image" value="random">
+                            <label for="start-random">Start from random image</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="start-specific" name="start-image" value="specific">
+                            <label for="start-specific">Start from specific image</label>
+                        </div>
+                    </div>
+                    
+                    <div class="specific-image-input" style="display: none;">
+                        <label for="specific-image">Image Number (1-50):</label>
+                        <input type="number" id="specific-image" min="1" max="50" value="1" step="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <div class="card-header">
+                    <i class="fas fa-images"></i>
+                    <h3>Image Range</h3>
+                </div>
+                <div class="card-content">
+                    <div class="range-inputs">
+                        <div class="input-group">
+                            <label for="start-range">Start Image:</label>
+                            <input type="number" id="start-range" min="1" max="50" value="1" step="1">
+                        </div>
+                        <div class="input-group">
+                            <label for="end-range">End Image:</label>
+                            <input type="number" id="end-range" min="1" max="50" value="50" step="1">
+                        </div>
+                    </div>
+                    <div class="range-info">
+                        <span id="range-display">Using images 1-50 (50 total images)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <div class="card-header">
+                    <i class="fas fa-cog"></i>
+                    <h3>Display Options</h3>
+                </div>
+                <div class="card-content">
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="auto-start" checked>
+                                <span class="toggle-slider"></span>
+                                Auto-start on page load
+                            </label>
+                        </div>
+                        <div class="toggle-item">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="loop-images" checked>
+                                <span class="toggle-slider"></span>
+                                Loop images continuously
+                            </label>
+                        </div>
+                        <div class="toggle-item">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="fade-transition" checked>
+                                <span class="toggle-slider"></span>
+                                Fade transition effect
+                            </label>
+                        </div>
+                        <div class="toggle-item">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="pause-on-hover">
+                                <span class="toggle-slider"></span>
+                                Pause on hover
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <div class="preview-card">
+                <div class="card-header">
+                    <i class="fas fa-eye"></i>
+                    <h3>Live Preview</h3>
+                </div>
+                <div class="card-content">
+                    <div class="preview-container">
+                        <div class="preview-floating-logo">
+                            <img id="preview-image" src="images/1.png" alt="Preview Image">
+                        </div>
+                        <div class="preview-info">
+                            <p><strong>Current Image:</strong> <span id="current-image-info">1.png</span></p>
+                            <p><strong>Next Change:</strong> <span id="next-change-info">10 minutes</span></p>
+                            <p><strong>Total Images:</strong> <span id="total-images-info">50</span></p>
+                        </div>
+                    </div>
+                    <div class="preview-controls">
+                        <button id="preview-prev" class="control-btn">
+                            <i class="fas fa-step-backward"></i> Previous
+                        </button>
+                        <button id="preview-play" class="control-btn primary">
+                            <i class="fas fa-play"></i> Start Preview
+                        </button>
+                        <button id="preview-next" class="control-btn">
+                            <i class="fas fa-step-forward"></i> Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button id="reset-settings" class="btn btn-secondary">
+                <i class="fas fa-undo"></i> Reset to Defaults
+            </button>
+            <button id="save-settings" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save & Apply Settings
+            </button>
+        </div>
+
+        <div class="current-settings">
+            <h4>Current Configuration Summary:</h4>
+            <div id="settings-summary" class="summary-content">
+                Images will change every 10 minutes, starting from image 1.png, using all 50 images with auto-start enabled.
+            </div>
+        </div>
+    </div>
+
+    <script src="settings.js"></script>
+</body>
+</html>
