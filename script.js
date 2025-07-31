@@ -268,7 +268,7 @@ if (floatingLogoContainer) {
 
 setInterval(() => {
     changeImage();
-}, 10000);
+}, 60000);
 
 function preloadImages() {
     imageArray.forEach(imageName => {
