@@ -251,11 +251,21 @@ function changeImage() {
     }, 150);
 }
 
-floatingImage.src = imageArray[0];
-floatingImage.style.opacity = '1';
-floatingImage.style.display = 'block';
-floatingImage.style.visibility = 'visible';
-currentImageIndex = 1;
+// Initialize with first image but don't start timer
+function initializeFloatingImage() {
+    if (floatingImage && imageArray.length > 0) {
+        floatingImage.src = imageArray[0];
+        floatingImage.style.opacity = '1';
+        floatingImage.style.display = 'block';
+        floatingImage.style.visibility = 'visible';
+        currentImageIndex = 0;
+    }
+}
+
+// Call initialization when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    initializeFloatingImage();
+});
 
 initializeMobileFloatingImage();
 
@@ -266,9 +276,87 @@ if (floatingLogoContainer) {
     floatingLogoContainer.style.opacity = '1';
 }
 
-setInterval(() => {
-    changeImage();
-}, 60000);
+// Timer will only start when user manually starts it
+let imageRotationTimer = null;
+
+function startImageRotation() {
+    if (imageRotationTimer) {
+        clearInterval(imageRotationTimer);
+    }
+    imageRotationTimer = setInterval(() => {
+        changeImage();
+    }, 60000);
+}
+
+function stopImageRotation() {
+    if (imageRotationTimer) {
+        clearInterval(imageRotationTimer);
+        imageRotationTimer = null;
+    }
+}
+
+// Manual control functions
+function toggleRotation() {
+    const toggleBtn = document.getElementById('toggle-rotation');
+    const statusElement = document.getElementById('timer-status');
+
+    if (imageRotationTimer) {
+        stopImageRotation();
+        toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+        toggleBtn.classList.remove('active');
+        if (statusElement) {
+            statusElement.innerHTML = '<span>Timer: Stopped</span>';
+        }
+    } else {
+        startImageRotation();
+        toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        toggleBtn.classList.add('active');
+        if (statusElement) {
+            statusElement.innerHTML = '<span>Timer: Running (1 min)</span>';
+        }
+    }
+}
+
+function previousImage() {
+    currentImageIndex--;
+    if (currentImageIndex < 0) {
+        currentImageIndex = imageArray.length - 1;
+    }
+    updateImageDisplay();
+}
+
+function nextImage() {
+    currentImageIndex++;
+    if (currentImageIndex >= imageArray.length) {
+        currentImageIndex = 0;
+    }
+    updateImageDisplay();
+}
+
+function updateImageDisplay() {
+    floatingImage.style.opacity = '0.3';
+    setTimeout(() => {
+        floatingImage.src = imageArray[currentImageIndex];
+        floatingImage.style.opacity = '1';
+    }, 150);
+}
+
+// Initialize manual controls
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('toggle-rotation');
+    const prevBtn = document.getElementById('prev-image');
+    const nextBtn = document.getElementById('next-image');
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', toggleRotation);
+    }
+    if (prevBtn) {
+        prevBtn.addEventListener('click', previousImage);
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextImage);
+    }
+});
 
 function preloadImages() {
     imageArray.forEach(imageName => {
