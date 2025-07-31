@@ -22,7 +22,7 @@ class ImageSettings {
             specificImage: 1,
             startRange: 1,
             endRange: 50,
-            autoStart: true,
+            autoStart: false,
             loopImages: true,
             fadeTransition: true,
             pauseOnHover: false

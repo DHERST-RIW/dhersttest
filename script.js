@@ -251,7 +251,7 @@ class FloatingImageManager {
             specificImage: 1,
             startRange: 1,
             endRange: 50,
-            autoStart: true,
+            autoStart: false,
             loopImages: true,
             fadeTransition: true,
             pauseOnHover: false
@@ -272,10 +272,13 @@ class FloatingImageManager {
     getStartingIndex() {
         switch(this.settings.startImage) {
             case 'random':
-                return Math.floor(Math.random() * this.imageArray.length);
+                const randomImageNumber = Math.floor(Math.random() * (this.settings.endRange - this.settings.startRange + 1)) + this.settings.startRange;
+                return randomImageNumber - this.settings.startRange;
             case 'specific':
-                const specificIndex = this.settings.specificImage - this.settings.startRange;
-                return Math.max(0, Math.min(specificIndex, this.imageArray.length - 1));
+                if (this.settings.specificImage >= this.settings.startRange && this.settings.specificImage <= this.settings.endRange) {
+                    return this.settings.specificImage - this.settings.startRange;
+                }
+                return 0;
             default:
                 return 0;
         }
@@ -296,10 +299,15 @@ class FloatingImageManager {
     init() {
         this.setupInitialImage();
         this.setupHoverEvents();
+        this.setupManualControls();
         this.preloadImages();
 
-        if (this.settings.autoStart) {
+        // Only start rotation if settings exist (user has configured it)
+        // AND auto-start is enabled
+        const hasUserSettings = localStorage.getItem('dherstImageSettings') !== null;
+        if (hasUserSettings && this.settings.autoStart) {
             this.startImageRotation();
+            this.updateControlButton(true);
         }
     }
 
@@ -324,9 +332,70 @@ class FloatingImageManager {
         }
     }
 
-    changeImage() {
-        if (this.isPaused) return;
+    setupManualControls() {
+        const toggleBtn = document.getElementById('toggle-rotation');
+        const prevBtn = document.getElementById('prev-image');
+        const nextBtn = document.getElementById('next-image');
 
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                this.toggleRotation();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                this.previousImage();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                this.nextImage();
+            });
+        }
+    }
+
+    toggleRotation() {
+        if (this.intervalTimer) {
+            this.stopImageRotation();
+            this.updateControlButton(false);
+        } else {
+            this.startImageRotation();
+            this.updateControlButton(true);
+        }
+    }
+
+    updateControlButton(isActive) {
+        const toggleBtn = document.getElementById('toggle-rotation');
+        if (toggleBtn) {
+            if (isActive) {
+                toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                toggleBtn.classList.add('active');
+            } else {
+                toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+                toggleBtn.classList.remove('active');
+            }
+        }
+    }
+
+    previousImage() {
+        this.currentImageIndex--;
+        if (this.currentImageIndex < 0) {
+            this.currentImageIndex = this.settings.loopImages ? this.imageArray.length - 1 : 0;
+        }
+        this.updateImageDisplay();
+    }
+
+    nextImage() {
+        this.currentImageIndex++;
+        if (this.currentImageIndex >= this.imageArray.length) {
+            this.currentImageIndex = this.settings.loopImages ? 0 : this.imageArray.length - 1;
+        }
+        this.updateImageDisplay();
+    }
+
+    updateImageDisplay() {
         if (this.settings.fadeTransition) {
             this.floatingImage.style.opacity = '0.3';
         }
@@ -336,8 +405,14 @@ class FloatingImageManager {
             if (this.settings.fadeTransition) {
                 this.floatingImage.style.opacity = '1';
             }
-            this.moveToNextImage();
         }, this.settings.fadeTransition ? 150 : 0);
+    }
+
+    changeImage() {
+        if (this.isPaused) return;
+
+        this.updateImageDisplay();
+        this.moveToNextImage();
     }
 
     moveToNextImage() {
@@ -367,6 +442,7 @@ class FloatingImageManager {
         if (this.intervalTimer) {
             clearInterval(this.intervalTimer);
             this.intervalTimer = null;
+            this.updateControlButton(false);
         }
     }
 
@@ -384,7 +460,37 @@ class FloatingImageManager {
             img.src = imageName;
         });
     }
+
+    // Method to reload settings and restart if needed
+    reloadSettings() {
+        const wasRunning = this.intervalTimer !== null;
+        this.stopImageRotation();
+
+        this.settings = this.loadSettings();
+        this.imageArray = this.generateImageArray();
+        this.currentImageIndex = this.getStartingIndex();
+
+        this.setupInitialImage();
+        this.setupHoverEvents();
+        this.preloadImages();
+
+        const hasUserSettings = localStorage.getItem('dherstImageSettings') !== null;
+        if (hasUserSettings && this.settings.autoStart) {
+            this.startImageRotation();
+            this.updateControlButton(true);
+        } else if (wasRunning) {
+            this.startImageRotation();
+            this.updateControlButton(true);
+        }
+    }
 }
+
+// Listen for settings changes from the settings page
+window.addEventListener('storage', (e) => {
+    if (e.key === 'dherstImageSettings') {
+        floatingImageManager.reloadSettings();
+    }
+});
 
 const floatingImageManager = new FloatingImageManager();
 
