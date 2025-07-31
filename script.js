@@ -251,6 +251,14 @@ function getSelectedImage() {
     return Math.max(1, Math.min(50, imageNumber)); // Ensure it's between 1-50
 }
 
+// Manual refresh function for testing
+window.refreshImage = function() {
+    console.log('Manual refresh triggered');
+    const currentImage = getSelectedImage();
+    console.log(`Current selected image: ${currentImage}`);
+    initializeFloatingImage();
+};
+
 // Listen for image selection changes
 window.addEventListener('storage', (e) => {
     if (e.key === 'selectedImage') {
@@ -258,9 +266,70 @@ window.addEventListener('storage', (e) => {
     }
 });
 
+// Listen for custom events (for same-tab updates)
+window.addEventListener('imageChanged', () => {
+    initializeFloatingImage();
+});
+
+// Listen for BroadcastChannel messages (cross-tab communication)
+try {
+    if (typeof BroadcastChannel !== 'undefined') {
+        const channel = new BroadcastChannel('imageUpdates');
+        channel.addEventListener('message', (event) => {
+            if (event.data.type === 'imageChanged') {
+                initializeFloatingImage();
+            }
+        });
+    }
+} catch (e) {
+    console.log('BroadcastChannel not available');
+}
+
+// Polling mechanism to check for changes (backup method)
+let lastSelectedImage = null;
+let lastTimestamp = null;
+function checkForImageChanges() {
+    const currentImage = getSelectedImage();
+    const currentTimestamp = localStorage.getItem('selectedImageTimestamp');
+
+    // Check if image number changed
+    if (lastSelectedImage !== null && lastSelectedImage !== currentImage) {
+        console.log(`Image changed from ${lastSelectedImage} to ${currentImage}`);
+        initializeFloatingImage();
+    }
+
+    // Check if timestamp changed (indicates recent update)
+    if (lastTimestamp !== null && lastTimestamp !== currentTimestamp) {
+        console.log('Image timestamp changed, refreshing...');
+        initializeFloatingImage();
+    }
+
+    lastSelectedImage = currentImage;
+    lastTimestamp = currentTimestamp;
+}
+
+// Refresh when window gains focus (user returns to tab)
+window.addEventListener('focus', () => {
+    console.log('Window focused, checking for image changes...');
+    checkForImageChanges();
+});
+
+// Refresh when page becomes visible
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        console.log('Page became visible, checking for image changes...');
+        checkForImageChanges();
+    }
+});
+
 // Call initialization when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     initializeFloatingImage();
+    lastSelectedImage = getSelectedImage();
+    lastTimestamp = localStorage.getItem('selectedImageTimestamp');
+
+    // Check for changes every 1 second as backup (more frequent for better responsiveness)
+    setInterval(checkForImageChanges, 1000);
 });
 
 initializeMobileFloatingImage();

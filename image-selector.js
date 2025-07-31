@@ -147,16 +147,41 @@ class ImageSelector {
         this.currentImage = this.previewImage;
         this.saveCurrentImage(this.currentImage);
         this.updateCurrentDisplay();
-        
-        // Trigger storage event for main page
+
+        // Multiple methods to ensure the change is communicated
+
+        // Method 1: Trigger storage event
         window.dispatchEvent(new StorageEvent('storage', {
             key: 'selectedImage',
             newValue: this.currentImage.toString(),
             storageArea: localStorage
         }));
-        
+
+        // Method 2: Trigger custom event
+        window.dispatchEvent(new CustomEvent('imageChanged', {
+            detail: { imageNumber: this.currentImage }
+        }));
+
+        // Method 3: Try to communicate with other tabs/windows
+        try {
+            // Use BroadcastChannel if available
+            if (typeof BroadcastChannel !== 'undefined') {
+                const channel = new BroadcastChannel('imageUpdates');
+                channel.postMessage({
+                    type: 'imageChanged',
+                    imageNumber: this.currentImage
+                });
+                channel.close();
+            }
+        } catch (e) {
+            console.log('BroadcastChannel not available');
+        }
+
+        // Method 4: Set a timestamp to help detect changes
+        localStorage.setItem('selectedImageTimestamp', Date.now().toString());
+
         this.showNotification(`Applied Image ${this.currentImage}!`, 'success');
-        
+
         // Optional: redirect to main page after a delay
         setTimeout(() => {
             if (confirm('Image applied! Would you like to go back to the main page to see the result?')) {
