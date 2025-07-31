@@ -232,280 +232,53 @@ function initializeMobileFloatingImage() {
     }
 }
 
-class FloatingImageManager {
-    constructor() {
-        this.settings = this.loadSettings();
-        this.floatingImage = document.getElementById('floating-image');
-        this.imageArray = this.generateImageArray();
-        this.currentImageIndex = this.getStartingIndex();
-        this.intervalTimer = null;
-        this.isPaused = false;
-        this.init();
-    }
+const floatingImage = document.getElementById('floating-image');
 
-    loadSettings() {
-        const defaultSettings = {
-            intervalType: 'minutes',
-            intervalValue: 10,
-            startImage: 'first',
-            specificImage: 1,
-            startRange: 1,
-            endRange: 50,
-            autoStart: false,
-            loopImages: true,
-            fadeTransition: true,
-            pauseOnHover: false
-        };
-
-        const saved = localStorage.getItem('dherstImageSettings');
-        return saved ? { ...defaultSettings, ...JSON.parse(saved) } : defaultSettings;
-    }
-
-    generateImageArray() {
-        const array = [];
-        for (let i = this.settings.startRange; i <= this.settings.endRange; i++) {
-            array.push(`images/${i}.png`);
-        }
-        return array;
-    }
-
-    getStartingIndex() {
-        switch(this.settings.startImage) {
-            case 'random':
-                const randomImageNumber = Math.floor(Math.random() * (this.settings.endRange - this.settings.startRange + 1)) + this.settings.startRange;
-                return randomImageNumber - this.settings.startRange;
-            case 'specific':
-                if (this.settings.specificImage >= this.settings.startRange && this.settings.specificImage <= this.settings.endRange) {
-                    return this.settings.specificImage - this.settings.startRange;
-                }
-                return 0;
-            default:
-                return 0;
-        }
-    }
-
-    getIntervalInMs() {
-        const value = this.settings.intervalValue;
-        switch(this.settings.intervalType) {
-            case 'seconds': return value * 1000;
-            case 'minutes': return value * 60 * 1000;
-            case 'hours': return value * 60 * 60 * 1000;
-            case 'days': return value * 24 * 60 * 60 * 1000;
-            case 'custom': return value;
-            default: return 10 * 60 * 1000;
-        }
-    }
-
-    init() {
-        this.setupInitialImage();
-        this.setupHoverEvents();
-        this.setupManualControls();
-        this.preloadImages();
-
-        // Only start rotation if settings exist (user has configured it)
-        // AND auto-start is enabled
-        const hasUserSettings = localStorage.getItem('dherstImageSettings') !== null;
-        if (hasUserSettings && this.settings.autoStart) {
-            this.startImageRotation();
-            this.updateControlButton(true);
-        }
-    }
-
-    setupInitialImage() {
-        this.floatingImage.src = this.imageArray[this.currentImageIndex];
-        this.floatingImage.style.opacity = '1';
-        this.floatingImage.style.display = 'block';
-        this.floatingImage.style.visibility = 'visible';
-    }
-
-    setupHoverEvents() {
-        if (this.settings.pauseOnHover) {
-            const floatingLogo = document.querySelector('.floating-logo');
-            if (floatingLogo) {
-                floatingLogo.addEventListener('mouseenter', () => {
-                    this.pauseRotation();
-                });
-                floatingLogo.addEventListener('mouseleave', () => {
-                    this.resumeRotation();
-                });
-            }
-        }
-    }
-
-    setupManualControls() {
-        const toggleBtn = document.getElementById('toggle-rotation');
-        const prevBtn = document.getElementById('prev-image');
-        const nextBtn = document.getElementById('next-image');
-
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', () => {
-                this.toggleRotation();
-            });
-        }
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                this.previousImage();
-            });
-        }
-
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                this.nextImage();
-            });
-        }
-    }
-
-    toggleRotation() {
-        if (this.intervalTimer) {
-            this.stopImageRotation();
-            this.updateControlButton(false);
-        } else {
-            this.startImageRotation();
-            this.updateControlButton(true);
-        }
-    }
-
-    updateControlButton(isActive) {
-        const toggleBtn = document.getElementById('toggle-rotation');
-        if (toggleBtn) {
-            if (isActive) {
-                toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                toggleBtn.classList.add('active');
-            } else {
-                toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
-                toggleBtn.classList.remove('active');
-            }
-        }
-    }
-
-    previousImage() {
-        this.currentImageIndex--;
-        if (this.currentImageIndex < 0) {
-            this.currentImageIndex = this.settings.loopImages ? this.imageArray.length - 1 : 0;
-        }
-        this.updateImageDisplay();
-    }
-
-    nextImage() {
-        this.currentImageIndex++;
-        if (this.currentImageIndex >= this.imageArray.length) {
-            this.currentImageIndex = this.settings.loopImages ? 0 : this.imageArray.length - 1;
-        }
-        this.updateImageDisplay();
-    }
-
-    updateImageDisplay() {
-        if (this.settings.fadeTransition) {
-            this.floatingImage.style.opacity = '0.3';
-        }
-
-        setTimeout(() => {
-            this.floatingImage.src = this.imageArray[this.currentImageIndex];
-            if (this.settings.fadeTransition) {
-                this.floatingImage.style.opacity = '1';
-            }
-        }, this.settings.fadeTransition ? 150 : 0);
-    }
-
-    changeImage() {
-        if (this.isPaused) return;
-
-        this.updateImageDisplay();
-        this.moveToNextImage();
-    }
-
-    moveToNextImage() {
-        this.currentImageIndex++;
-        if (this.currentImageIndex >= this.imageArray.length) {
-            if (this.settings.loopImages) {
-                this.currentImageIndex = 0;
-            } else {
-                this.currentImageIndex = this.imageArray.length - 1;
-                this.stopImageRotation();
-            }
-        }
-    }
-
-    startImageRotation() {
-        if (this.intervalTimer) {
-            clearInterval(this.intervalTimer);
-        }
-
-        const intervalMs = this.getIntervalInMs();
-        this.intervalTimer = setInterval(() => {
-            this.changeImage();
-        }, intervalMs);
-    }
-
-    stopImageRotation() {
-        if (this.intervalTimer) {
-            clearInterval(this.intervalTimer);
-            this.intervalTimer = null;
-            this.updateControlButton(false);
-        }
-    }
-
-    pauseRotation() {
-        this.isPaused = true;
-    }
-
-    resumeRotation() {
-        this.isPaused = false;
-    }
-
-    preloadImages() {
-        this.imageArray.forEach(imageName => {
-            const img = new Image();
-            img.src = imageName;
-        });
-    }
-
-    // Method to reload settings and restart if needed
-    reloadSettings() {
-        const wasRunning = this.intervalTimer !== null;
-        this.stopImageRotation();
-
-        this.settings = this.loadSettings();
-        this.imageArray = this.generateImageArray();
-        this.currentImageIndex = this.getStartingIndex();
-
-        this.setupInitialImage();
-        this.setupHoverEvents();
-        this.preloadImages();
-
-        const hasUserSettings = localStorage.getItem('dherstImageSettings') !== null;
-        if (hasUserSettings && this.settings.autoStart) {
-            this.startImageRotation();
-            this.updateControlButton(true);
-        } else if (wasRunning) {
-            this.startImageRotation();
-            this.updateControlButton(true);
-        }
-    }
+const imageArray = [];
+for (let i = 1; i <= 50; i++) {
+    imageArray.push(`images/${i}.png`);
 }
 
-// Listen for settings changes from the settings page
-window.addEventListener('storage', (e) => {
-    if (e.key === 'dherstImageSettings' && floatingImageManager) {
-        floatingImageManager.reloadSettings();
-    }
-});
+let currentImageIndex = 0;
 
-let floatingImageManager;
+function changeImage() {
+    floatingImage.style.opacity = '1';
 
-document.addEventListener('DOMContentLoaded', () => {
-    floatingImageManager = new FloatingImageManager();
-    initializeMobileFloatingImage();
+    setTimeout(() => {
+        floatingImage.src = imageArray[currentImageIndex];
+        floatingImage.style.opacity = '1';
+        currentImageIndex = (currentImageIndex + 1) % imageArray.length;
+    }, 150);
+}
 
-    const floatingLogoContainer = document.querySelector('.floating-logo');
-    if (floatingLogoContainer) {
-        floatingLogoContainer.style.display = 'block';
-        floatingLogoContainer.style.visibility = 'visible';
-        floatingLogoContainer.style.opacity = '1';
-    }
-});
+floatingImage.src = imageArray[0];
+floatingImage.style.opacity = '1';
+floatingImage.style.display = 'block';
+floatingImage.style.visibility = 'visible';
+currentImageIndex = 1;
 
+initializeMobileFloatingImage();
+
+const floatingLogoContainer = document.querySelector('.floating-logo');
+if (floatingLogoContainer) {
+    floatingLogoContainer.style.display = 'block';
+    floatingLogoContainer.style.visibility = 'visible';
+    floatingLogoContainer.style.opacity = '1';
+}
+
+setInterval(() => {
+    changeImage();
+}, 10000);
+
+function preloadImages() {
+    imageArray.forEach(imageName => {
+        const img = new Image();
+        img.src = imageName;
+    });
+}
+
+window.addEventListener('load', preloadImages);
+document.addEventListener('DOMContentLoaded', initializeMobileFloatingImage);
 window.addEventListener('load', initializeMobileFloatingImage);
 window.addEventListener('resize', debounce(initializeMobileFloatingImage, 250));
 setTimeout(initializeMobileFloatingImage, 100);
