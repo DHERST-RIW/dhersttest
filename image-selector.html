@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHERST - Image Selector</title>
+    <link rel="icon" type="image/png" href="dherst_logo.png">
+    <link rel="stylesheet" href="image-selector.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="dherst_logo.png" alt="DHERST Logo" class="nav-logo-img">
+                <span class="nav-title">Image Selector</span>
+            </div>
+            <div class="nav-actions">
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Select Display Image</h1>
+            <p>Choose which image to display on the main page</p>
+        </div>
+
+        <div class="current-selection">
+            <div class="current-image">
+                <img id="current-display" src="images/1.png" alt="Current Selection">
+                <div class="image-info">
+                    <h3>Currently Selected</h3>
+                    <p id="current-info">Image 1.png</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="selector-section">
+            <h2>Choose Image (1-50)</h2>
+            
+            <div class="quick-input">
+                <label for="image-number">Image Number:</label>
+                <input type="number" id="image-number" min="1" max="50" value="1" step="1">
+                <button id="preview-btn" class="btn btn-primary">Preview</button>
+            </div>
+
+            <div class="quick-select">
+                <h3>Quick Select:</h3>
+                <div class="quick-buttons">
+                    <button class="quick-btn" data-image="1">1</button>
+                    <button class="quick-btn" data-image="5">5</button>
+                    <button class="quick-btn" data-image="10">10</button>
+                    <button class="quick-btn" data-image="15">15</button>
+                    <button class="quick-btn" data-image="20">20</button>
+                    <button class="quick-btn" data-image="25">25</button>
+                    <button class="quick-btn" data-image="30">30</button>
+                    <button class="quick-btn" data-image="35">35</button>
+                    <button class="quick-btn" data-image="40">40</button>
+                    <button class="quick-btn" data-image="45">45</button>
+                    <button class="quick-btn" data-image="50">50</button>
+                </div>
+            </div>
+
+            <div class="navigation-controls">
+                <button id="prev-btn" class="nav-btn">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <span id="current-number">1</span>
+                <button id="next-btn" class="nav-btn">
+                    <i class="fas fa-chevron-right"></i> Next
+                </button>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <h2>Preview</h2>
+            <div class="preview-container">
+                <div class="preview-image">
+                    <img id="preview-display" src="images/1.png" alt="Preview">
+                </div>
+                <div class="preview-info">
+                    <p><strong>Preview:</strong> <span id="preview-info">Image 1.png</span></p>
+                    <p><strong>File:</strong> <span id="preview-file">images/1.png</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button id="reset-btn" class="btn btn-secondary">
+                <i class="fas fa-undo"></i> Reset to Image 1
+            </button>
+            <button id="apply-btn" class="btn btn-primary">
+                <i class="fas fa-check"></i> Apply Selection
+            </button>
+        </div>
+
+        <div class="info-section">
+            <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> How it works</h3>
+                <ul>
+                    <li>Select an image number (1-50)</li>
+                    <li>Preview your selection</li>
+                    <li>Click "Apply Selection" to set it</li>
+                    <li>The main page will display your chosen image</li>
+                    <li>No automatic countdown - image stays fixed</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="image-selector.js"></script>
+</body>
+</html>
