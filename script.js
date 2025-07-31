@@ -234,32 +234,14 @@ function initializeMobileFloatingImage() {
 
 const floatingImage = document.getElementById('floating-image');
 
-const imageArray = [];
-for (let i = 1; i <= 50; i++) {
-    imageArray.push(`images/${i}.png`);
-}
-
-let currentImageIndex = 0;
-
-function changeImage() {
-    floatingImage.style.opacity = '1';
-
-    setTimeout(() => {
-        floatingImage.src = imageArray[currentImageIndex];
-        floatingImage.style.opacity = '1';
-        currentImageIndex = (currentImageIndex + 1) % imageArray.length;
-    }, 150);
-}
-
 // Initialize with selected image from settings
 function initializeFloatingImage() {
-    if (floatingImage && imageArray.length > 0) {
+    if (floatingImage) {
         const selectedImage = getSelectedImage();
         floatingImage.src = `images/${selectedImage}.png`;
         floatingImage.style.opacity = '1';
         floatingImage.style.display = 'block';
         floatingImage.style.visibility = 'visible';
-        currentImageIndex = selectedImage - 1; // Convert to array index
     }
 }
 
@@ -290,79 +272,7 @@ if (floatingLogoContainer) {
     floatingLogoContainer.style.opacity = '1';
 }
 
-// No automatic timer - images are manually selected only
-
-// Manual navigation functions (temporary browsing)
-function previousImage() {
-    let currentSelected = getSelectedImage();
-    let newImage = currentSelected - 1;
-    if (newImage < 1) newImage = 50;
-
-    updateImageDisplay(newImage);
-    showImageInfo(newImage);
-}
-
-function nextImage() {
-    let currentSelected = getSelectedImage();
-    let newImage = currentSelected + 1;
-    if (newImage > 50) newImage = 1;
-
-    updateImageDisplay(newImage);
-    showImageInfo(newImage);
-}
-
-function updateImageDisplay(imageNumber) {
-    floatingImage.style.opacity = '0.3';
-    setTimeout(() => {
-        floatingImage.src = `images/${imageNumber}.png`;
-        floatingImage.style.opacity = '1';
-    }, 150);
-}
-
-function showImageInfo(imageNumber) {
-    const statusElement = document.getElementById('timer-status');
-    if (statusElement) {
-        statusElement.innerHTML = `<span>Viewing: Image ${imageNumber}</span>`;
-
-        // Reset to selected image after 3 seconds
-        setTimeout(() => {
-            const selectedImage = getSelectedImage();
-            updateImageDisplay(selectedImage);
-            statusElement.innerHTML = `<span>Selected: Image ${selectedImage}</span>`;
-        }, 3000);
-    }
-}
-
-function openImageSelector() {
-    window.location.href = 'image-selector.html';
-}
-
-// Initialize manual controls
-document.addEventListener('DOMContentLoaded', () => {
-    const toggleBtn = document.getElementById('toggle-rotation');
-    const prevBtn = document.getElementById('prev-image');
-    const nextBtn = document.getElementById('next-image');
-    const statusElement = document.getElementById('timer-status');
-
-    // Change toggle button to settings button
-    if (toggleBtn) {
-        toggleBtn.innerHTML = '<i class="fas fa-cog"></i>';
-        toggleBtn.addEventListener('click', openImageSelector);
-    }
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', previousImage);
-    }
-    if (nextBtn) {
-        nextBtn.addEventListener('click', nextImage);
-    }
-
-    // Update status display
-    if (statusElement) {
-        const selectedImage = getSelectedImage();
-        statusElement.innerHTML = `<span>Selected: Image ${selectedImage}</span>`;
-    }
-});
+// Simple static image display - no controls needed for public view
 
 function preloadImages() {
     imageArray.forEach(imageName => {
