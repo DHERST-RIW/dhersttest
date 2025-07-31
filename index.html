@@ -14,8 +14,6 @@
         <img id="floating-image" src="images/1.png" alt="Papua New Guinea Coat of Arms" />
     </div>
 
-
-
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -122,6 +120,101 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // COMPLETELY CLEAN - NO TIMERS, NO INTERVALS, NO COUNTDOWNS
+        
+        // Get selected image from localStorage or default to 1
+        function getSelectedImage() {
+            const saved = localStorage.getItem('selectedImage');
+            const imageNumber = saved ? parseInt(saved) : 1;
+            return Math.max(1, Math.min(50, imageNumber));
+        }
+
+        // Set the image source immediately on page load
+        function setFloatingImage() {
+            const floatingImage = document.getElementById('floating-image');
+            const selectedImage = getSelectedImage();
+            if (floatingImage) {
+                floatingImage.src = `images/${selectedImage}.png`;
+                console.log(`Displaying image: ${selectedImage}.png`);
+            }
+        }
+
+        // Mobile navigation
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (mobileMenu && navMenu) {
+            mobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                if (window.scrollY > 50) {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                    navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                    navbar.style.boxShadow = 'none';
+                }
+            }
+        });
+
+        // Initialize everything when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            setFloatingImage();
+            
+            // Mobile floating image setup
+            const floatingLogo = document.querySelector('.floating-logo');
+            const floatingImg = document.querySelector('#floating-image');
+            
+            if (floatingLogo && floatingImg) {
+                floatingLogo.style.position = 'fixed';
+                floatingLogo.style.top = '60px';
+                floatingLogo.style.right = '10px';
+                floatingLogo.style.zIndex = '99999';
+                floatingLogo.style.display = 'block';
+                floatingLogo.style.visibility = 'visible';
+                floatingLogo.style.opacity = '1';
+                
+                floatingImg.style.display = 'block';
+                floatingImg.style.visibility = 'visible';
+                floatingImg.style.opacity = '1';
+                
+                if (window.innerWidth <= 768) {
+                    floatingImg.style.width = '130px';
+                    floatingImg.style.height = 'auto';
+                } else {
+                    floatingImg.style.width = '400px';
+                    floatingImg.style.height = '360px';
+                }
+                floatingImg.style.objectFit = 'contain';
+            }
+        });
+
+        // Listen for page visibility changes (when user returns to tab)
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                setFloatingImage();
+            }
+        });
+
+        // Listen for window focus (when user clicks on tab)
+        window.addEventListener('focus', () => {
+            setFloatingImage();
+        });
+    </script>
 </body>
 </html>

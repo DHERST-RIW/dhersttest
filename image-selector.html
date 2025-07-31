@@ -30,6 +30,12 @@
             <p>Choose which image to display on the main page</p>
         </div>
 
+        <div id="success-message" class="alert alert-success" style="display: none;">
+            <i class="fas fa-check-circle"></i> 
+            <span id="success-text"></span>
+            <a href="index.html" class="btn btn-primary" style="margin-left: 1rem;">View Main Page</a>
+        </div>
+
         <div class="current-selection">
             <div class="current-image">
                 <img id="current-display" src="images/1.png" alt="Current Selection">
@@ -52,7 +58,7 @@
             <div class="quick-select">
                 <h3>Quick Select:</h3>
                 <div class="quick-buttons">
-                    <button class="quick-btn" data-image="1">1</button>
+                    <button class="quick-btn active" data-image="1">1</button>
                     <button class="quick-btn" data-image="5">5</button>
                     <button class="quick-btn" data-image="10">10</button>
                     <button class="quick-btn" data-image="15">15</button>
@@ -113,6 +119,162 @@
         </div>
     </div>
 
-    <script src="image-selector.js"></script>
+    <script>
+        // COMPLETELY CLEAN IMAGE SELECTOR - NO TIMERS OR INTERVALS
+        
+        let currentImage = 1;
+        let previewImage = 1;
+
+        // Load current selection from localStorage
+        function loadCurrentSelection() {
+            const saved = localStorage.getItem('selectedImage');
+            currentImage = saved ? parseInt(saved) : 1;
+            currentImage = Math.max(1, Math.min(50, currentImage));
+            previewImage = currentImage;
+            
+            updateCurrentDisplay();
+            updatePreviewDisplay();
+            updateUI();
+        }
+
+        // Save selection to localStorage
+        function saveSelection(imageNumber) {
+            localStorage.setItem('selectedImage', imageNumber.toString());
+            currentImage = imageNumber;
+        }
+
+        // Update current display
+        function updateCurrentDisplay() {
+            const currentDisplay = document.getElementById('current-display');
+            const currentInfo = document.getElementById('current-info');
+            
+            currentDisplay.src = `images/${currentImage}.png`;
+            currentInfo.textContent = `Image ${currentImage}.png`;
+        }
+
+        // Update preview display
+        function updatePreviewDisplay() {
+            const previewDisplay = document.getElementById('preview-display');
+            const previewInfo = document.getElementById('preview-info');
+            const previewFile = document.getElementById('preview-file');
+            const currentNumber = document.getElementById('current-number');
+            
+            previewDisplay.src = `images/${previewImage}.png`;
+            previewInfo.textContent = `Image ${previewImage}.png`;
+            previewFile.textContent = `images/${previewImage}.png`;
+            currentNumber.textContent = previewImage;
+        }
+
+        // Update UI elements
+        function updateUI() {
+            document.getElementById('image-number').value = previewImage;
+            
+            // Update active button
+            document.querySelectorAll('.quick-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.dataset.image) === previewImage) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Show success message
+        function showSuccess(imageNumber) {
+            const successMessage = document.getElementById('success-message');
+            const successText = document.getElementById('success-text');
+            
+            successText.textContent = `Image ${imageNumber} selected successfully!`;
+            successMessage.style.display = 'flex';
+            
+            // Hide after 5 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCurrentSelection();
+
+            // Input field
+            const imageInput = document.getElementById('image-number');
+            imageInput.addEventListener('input', (e) => {
+                const value = parseInt(e.target.value);
+                if (value >= 1 && value <= 50) {
+                    previewImage = value;
+                    updatePreviewDisplay();
+                    updateUI();
+                }
+            });
+
+            // Preview button
+            document.getElementById('preview-btn').addEventListener('click', () => {
+                const value = parseInt(imageInput.value);
+                if (value >= 1 && value <= 50) {
+                    previewImage = value;
+                    updatePreviewDisplay();
+                    updateUI();
+                }
+            });
+
+            // Quick select buttons
+            document.querySelectorAll('.quick-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const imageNumber = parseInt(e.target.dataset.image);
+                    previewImage = imageNumber;
+                    updatePreviewDisplay();
+                    updateUI();
+                });
+            });
+
+            // Navigation buttons
+            document.getElementById('prev-btn').addEventListener('click', () => {
+                if (previewImage > 1) {
+                    previewImage--;
+                    updatePreviewDisplay();
+                    updateUI();
+                }
+            });
+
+            document.getElementById('next-btn').addEventListener('click', () => {
+                if (previewImage < 50) {
+                    previewImage++;
+                    updatePreviewDisplay();
+                    updateUI();
+                }
+            });
+
+            // Reset button
+            document.getElementById('reset-btn').addEventListener('click', () => {
+                previewImage = 1;
+                updatePreviewDisplay();
+                updateUI();
+            });
+
+            // Apply button
+            document.getElementById('apply-btn').addEventListener('click', () => {
+                saveSelection(previewImage);
+                updateCurrentDisplay();
+                showSuccess(previewImage);
+                
+                console.log(`Applied image ${previewImage}`);
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' && previewImage > 1) {
+                    previewImage--;
+                    updatePreviewDisplay();
+                    updateUI();
+                } else if (e.key === 'ArrowRight' && previewImage < 50) {
+                    previewImage++;
+                    updatePreviewDisplay();
+                    updateUI();
+                } else if (e.key === 'Enter') {
+                    document.getElementById('apply-btn').click();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
