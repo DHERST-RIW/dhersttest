@@ -487,23 +487,25 @@ class FloatingImageManager {
 
 // Listen for settings changes from the settings page
 window.addEventListener('storage', (e) => {
-    if (e.key === 'dherstImageSettings') {
+    if (e.key === 'dherstImageSettings' && floatingImageManager) {
         floatingImageManager.reloadSettings();
     }
 });
 
-const floatingImageManager = new FloatingImageManager();
+let floatingImageManager;
 
-initializeMobileFloatingImage();
+document.addEventListener('DOMContentLoaded', () => {
+    floatingImageManager = new FloatingImageManager();
+    initializeMobileFloatingImage();
 
-const floatingLogoContainer = document.querySelector('.floating-logo');
-if (floatingLogoContainer) {
-    floatingLogoContainer.style.display = 'block';
-    floatingLogoContainer.style.visibility = 'visible';
-    floatingLogoContainer.style.opacity = '1';
-}
+    const floatingLogoContainer = document.querySelector('.floating-logo');
+    if (floatingLogoContainer) {
+        floatingLogoContainer.style.display = 'block';
+        floatingLogoContainer.style.visibility = 'visible';
+        floatingLogoContainer.style.opacity = '1';
+    }
+});
 
-document.addEventListener('DOMContentLoaded', initializeMobileFloatingImage);
 window.addEventListener('load', initializeMobileFloatingImage);
 window.addEventListener('resize', debounce(initializeMobileFloatingImage, 250));
 setTimeout(initializeMobileFloatingImage, 100);
