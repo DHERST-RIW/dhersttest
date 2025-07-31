@@ -1,4 +1,3 @@
-// Mobile Navigation Toggle
 const mobileMenu = document.getElementById('mobile-menu');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -7,7 +6,6 @@ mobileMenu.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 });
 
-// Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
@@ -15,7 +13,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Navbar scroll effect
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
@@ -27,7 +24,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -41,7 +37,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -56,11 +51,9 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
-    // Add animation classes to elements
     const animatedElements = document.querySelectorAll('.feature-card, .stat-item, .hero-content, .hero-image');
-    
+
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -68,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Animate hero content on load
     setTimeout(() => {
         document.querySelector('.hero-content').style.opacity = '1';
         document.querySelector('.hero-content').style.transform = 'translateY(0)';
@@ -80,10 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 600);
 });
 
-// Counter animation for stats
 const animateCounters = () => {
     const counters = document.querySelectorAll('.stat-number');
-    
+
     counters.forEach(counter => {
         const target = parseInt(counter.textContent.replace(/\D/g, ''));
         const suffix = counter.textContent.replace(/\d/g, '');
@@ -101,7 +92,6 @@ const animateCounters = () => {
     });
 };
 
-// Trigger counter animation when stats section is visible
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -116,49 +106,45 @@ if (statsSection) {
     statsObserver.observe(statsSection);
 }
 
-// Parallax effect for hero section
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const heroImage = document.querySelector('.hero-image');
     const heroContent = document.querySelector('.hero-content');
-    
+
     if (heroImage && heroContent) {
         const rate = scrolled * -0.5;
         heroImage.style.transform = `translateY(${rate}px)`;
     }
 });
 
-// Button click effects
 document.querySelectorAll('.btn').forEach(button => {
     button.addEventListener('click', function(e) {
-        // Create ripple effect
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
         const x = e.clientX - rect.left - size / 2;
         const y = e.clientY - rect.top - size / 2;
-        
+
         ripple.style.width = ripple.style.height = size + 'px';
         ripple.style.left = x + 'px';
         ripple.style.top = y + 'px';
         ripple.classList.add('ripple');
-        
+
         this.appendChild(ripple);
-        
+
         setTimeout(() => {
             ripple.remove();
         }, 600);
     });
 });
 
-// Add ripple CSS
 const style = document.createElement('style');
 style.textContent = `
     .btn {
         position: relative;
         overflow: hidden;
     }
-    
+
     .ripple {
         position: absolute;
         border-radius: 50%;
@@ -167,7 +153,7 @@ style.textContent = `
         animation: ripple-animation 0.6s linear;
         pointer-events: none;
     }
-    
+
     @keyframes ripple-animation {
         to {
             transform: scale(4);
@@ -177,19 +163,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Form handling (if forms are added later)
-const handleFormSubmit = (formSelector) => {
-    const form = document.querySelector(formSelector);
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Add form submission logic here
-            console.log('Form submitted');
-        });
-    }
-};
-
-// Lazy loading for images
 const lazyImages = document.querySelectorAll('img[data-src]');
 const imageObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -204,7 +177,6 @@ const imageObserver = new IntersectionObserver((entries) => {
 
 lazyImages.forEach(img => imageObserver.observe(img));
 
-// Preloader (optional)
 window.addEventListener('load', () => {
     const preloader = document.querySelector('.preloader');
     if (preloader) {
@@ -215,25 +187,6 @@ window.addEventListener('load', () => {
     }
 });
 
-// Theme toggle (if needed)
-const toggleTheme = () => {
-    document.body.classList.toggle('dark-theme');
-    localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
-};
-
-// Load saved theme
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-    document.body.classList.add('dark-theme');
-}
-
-// Add theme toggle button functionality
-const themeToggle = document.querySelector('.theme-toggle');
-if (themeToggle) {
-    themeToggle.addEventListener('click', toggleTheme);
-}
-
-// Performance optimization: Debounce scroll events
 const debounce = (func, wait) => {
     let timeout;
     return function executedFunction(...args) {
@@ -246,33 +199,15 @@ const debounce = (func, wait) => {
     };
 };
 
-// Apply debounce to scroll events
-const debouncedScrollHandler = debounce(() => {
-    // Scroll handling code here
-}, 10);
-
-window.addEventListener('scroll', debouncedScrollHandler);
-
-console.log('Website loaded successfully!');
-
-// Mobile detection function
 function isMobile() {
     return window.innerWidth <= 768;
 }
 
-// Initialize floating image for mobile
 function initializeMobileFloatingImage() {
     const floatingLogo = document.querySelector('.floating-logo');
     const floatingImg = document.querySelector('#floating-image');
-    
-    console.log('Checking mobile floating image...');
-    console.log('Is mobile:', isMobile());
-    console.log('Floating logo element:', floatingLogo);
-    console.log('Floating image element:', floatingImg);
-    console.log('Screen width:', window.innerWidth);
-    
+
     if (floatingLogo && floatingImg) {
-        // Force visibility regardless of screen size for debugging
         floatingLogo.style.position = 'fixed';
         floatingLogo.style.top = '60px';
         floatingLogo.style.right = '10px';
@@ -282,32 +217,23 @@ function initializeMobileFloatingImage() {
         floatingLogo.style.visibility = 'visible';
         floatingLogo.style.opacity = '1';
         floatingLogo.style.pointerEvents = 'none';
-        
+
         floatingImg.style.display = 'block';
         floatingImg.style.visibility = 'visible';
         floatingImg.style.opacity = '1';
-        // FORCE MASSIVE SIZE FOR DESKTOP
         if (isMobile()) {
             floatingImg.style.width = '130px';
             floatingImg.style.height = 'auto';
         } else {
-            // PERFECT DESKTOP SIZE - BIG BUT NOT OVERWHELMING
             floatingImg.style.width = '400px';
             floatingImg.style.height = '360px';
         }
         floatingImg.style.objectFit = 'contain';
-        
-        console.log('Mobile floating image initialized');
-        console.log('Final logo styles:', window.getComputedStyle(floatingLogo));
-    } else {
-        console.error('Floating logo or image element not found!');
     }
 }
 
-// Timer-based Floating Image System (5-second intervals)
 const floatingImage = document.getElementById('floating-image');
 
-// Generate array of all PNG images from the images folder (1.png to 50.png)
 const imageArray = [];
 for (let i = 1; i <= 50; i++) {
     imageArray.push(`images/${i}.png`);
@@ -316,30 +242,23 @@ for (let i = 1; i <= 50; i++) {
 let currentImageIndex = 0;
 
 function changeImage() {
-    // Quick fade effect for smooth transition
     floatingImage.style.opacity = '1';
 
     setTimeout(() => {
         floatingImage.src = imageArray[currentImageIndex];
         floatingImage.style.opacity = '1';
-        console.log(`Image changed to: ${imageArray[currentImageIndex]}`);
-
-        // Move to next image, loop back to start when reaching the end
         currentImageIndex = (currentImageIndex + 1) % imageArray.length;
     }, 150);
 }
 
-// Set first image immediately when page loads with full opacity
 floatingImage.src = imageArray[0];
 floatingImage.style.opacity = '1';
 floatingImage.style.display = 'block';
 floatingImage.style.visibility = 'visible';
-currentImageIndex = 1; // Start from second image for the timer
+currentImageIndex = 1;
 
-// Initialize mobile floating image immediately
 initializeMobileFloatingImage();
 
-// Ensure floating logo container is visible on mobile
 const floatingLogoContainer = document.querySelector('.floating-logo');
 if (floatingLogoContainer) {
     floatingLogoContainer.style.display = 'block';
@@ -347,12 +266,10 @@ if (floatingLogoContainer) {
     floatingLogoContainer.style.opacity = '1';
 }
 
-// Change image every 5 seconds (5000 milliseconds)
 setInterval(() => {
     changeImage();
 }, 10000);
 
-// Preload all images for smooth transitions
 function preloadImages() {
     imageArray.forEach(imageName => {
         const img = new Image();
@@ -360,68 +277,8 @@ function preloadImages() {
     });
 }
 
-// Preload images when page loads
 window.addEventListener('load', preloadImages);
-
-// Initialize mobile floating image as soon as DOM is ready
 document.addEventListener('DOMContentLoaded', initializeMobileFloatingImage);
-
-// Initialize mobile floating image on page load
 window.addEventListener('load', initializeMobileFloatingImage);
-
-// Re-initialize on window resize
 window.addEventListener('resize', debounce(initializeMobileFloatingImage, 250));
-
-// Force initialization after a short delay to ensure all elements are ready
 setTimeout(initializeMobileFloatingImage, 100);
-
-
-console.log('Timer-based image system initialized with 5-second intervals');
-console.log(`Total images available: ${imageArray.length}`);
-
-// Test function - you can call this in browser console to manually change image
-window.nextImage = function() {
-    changeImage();
-};
-
-// Test function to force floating image visibility
-window.showFloatingImage = function() {
-    console.log('Forcing floating image to show...');
-    const floatingLogo = document.querySelector('.floating-logo');
-    const floatingImg = document.querySelector('#floating-image');
-    
-    if (floatingLogo && floatingImg) {
-        floatingLogo.style.cssText = `
-            position: fixed !important;
-            top: 60px !important;
-            right: 10px !important;
-            left: auto !important;
-            z-index: 99999 !important;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            pointer-events: none !important;
-            width: 150px !important;
-            height: auto !important;
-        `;
-        
-        floatingImg.style.cssText = `
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            width: 400px !important;
-            height: 360px !important;
-            object-fit: contain !important;
-        `;
-        
-        console.log('Floating image forced to show with red border');
-        console.log('Logo element:', floatingLogo);
-        console.log('Image element:', floatingImg);
-    } else {
-        console.error('Elements not found!');
-    }
-};
-
-console.log('Test functions available:');
-console.log('- nextImage() - manually advance to next image');
-console.log('- showFloatingImage() - force floating image to show with red border');

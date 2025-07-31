@@ -1,4 +1,3 @@
-/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +11,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Color Variables - DHERST Grey and Red Theme */
 :root {
     --primary-color: #dc2626;
     --secondary-color: #991b1b;
@@ -29,7 +27,6 @@ body {
     --gradient-3: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
 }
 
-/* Floating Logo - MASSIVE SIZE */
 .floating-logo {
     position: fixed !important;
     top: 20px !important;
@@ -41,10 +38,10 @@ body {
 }
 
 .floating-logo img {
-    width: 800px !important;
-    height: 720px !important;
-    min-width: 800px !important;
-    min-height: 720px !important;
+    width: 400px !important;
+    height: 360px !important;
+    min-width: 400px !important;
+    min-height: 360px !important;
     max-width: none !important;
     max-height: none !important;
     object-fit: contain !important;
@@ -65,32 +62,8 @@ body {
     }
 }
 
-/* GOOD SIZE DESKTOP IMAGES */
-@media screen and (min-width: 769px) {
-    .floating-logo img,
-    #floating-image,
-    body .floating-logo img,
-    html body .floating-logo img,
-    img#floating-image {
-        width: 400px !important;
-        height: 360px !important;
-        min-width: 400px !important;
-        min-height: 360px !important;
-        max-width: none !important;
-        max-height: none !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-}
-
-/* LARGE DESKTOP - SLIGHTLY BIGGER */
 @media screen and (min-width: 1200px) {
-    .floating-logo img,
-    #floating-image,
-    body .floating-logo img,
-    html body .floating-logo img,
-    img#floating-image {
+    .floating-logo img {
         width: 450px !important;
         height: 405px !important;
         min-width: 450px !important;
@@ -98,13 +71,8 @@ body {
     }
 }
 
-/* EXTRA LARGE DESKTOP - BIGGER */
 @media screen and (min-width: 1600px) {
-    .floating-logo img,
-    #floating-image,
-    body .floating-logo img,
-    html body .floating-logo img,
-    img#floating-image {
+    .floating-logo img {
         width: 500px !important;
         height: 450px !important;
         min-width: 500px !important;
@@ -112,81 +80,6 @@ body {
     }
 }
 
-/* GOOD SIZE - OVERRIDE EVERYTHING */
-.floating-logo img,
-#floating-image,
-body .floating-logo img,
-html body .floating-logo img,
-img#floating-image,
-div.floating-logo img,
-html body div.floating-logo img {
-    width: 400px !important;
-    height: 360px !important;
-    min-width: 400px !important;
-    min-height: 360px !important;
-    max-width: none !important;
-    max-height: none !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    object-fit: contain !important;
-}
-
-/* DESKTOP GOOD SIZE - FINAL */
-@media screen and (min-width: 769px) {
-    .floating-logo img,
-    #floating-image,
-    body .floating-logo img,
-    html body .floating-logo img,
-    img#floating-image,
-    div.floating-logo img,
-    html body div.floating-logo img {
-        width: 400px !important;
-        height: 360px !important;
-        min-width: 400px !important;
-        min-height: 360px !important;
-    }
-}
-
-/* REMOVED THE 260PX RULE THAT WAS MAKING IMAGES SMALL */
-
-/* PERFECT SIZE - BIG BUT NOT OVERWHELMING */
-html body div.floating-logo img#floating-image,
-html body .floating-logo img#floating-image,
-body div.floating-logo img#floating-image,
-div.floating-logo img#floating-image,
-.floating-logo img#floating-image,
-img#floating-image {
-    width: 400px !important;
-    height: 360px !important;
-    min-width: 400px !important;
-    min-height: 360px !important;
-    max-width: none !important;
-    max-height: none !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    object-fit: contain !important;
-    position: relative !important;
-    z-index: 99999 !important;
-}
-
-/* DESKTOP PERFECT SIZE */
-@media screen and (min-width: 769px) {
-    html body div.floating-logo img#floating-image,
-    html body .floating-logo img#floating-image,
-    body div.floating-logo img#floating-image,
-    div.floating-logo img#floating-image,
-    .floating-logo img#floating-image,
-    img#floating-image {
-        width: 400px !important;
-        height: 360px !important;
-        min-width: 400px !important;
-        min-height: 360px !important;
-    }
-}
-
-/* Mobile responsive adjustments for floating logo */
 @media screen and (max-width: 768px) {
     .floating-logo {
         position: fixed !important;
@@ -199,7 +92,6 @@ img#floating-image {
         opacity: 1 !important;
         pointer-events: none !important;
         animation: float 10s ease-in-out infinite !important;
-        transform: none !important;
     }
 
     .floating-logo img {
@@ -210,65 +102,30 @@ img#floating-image {
         display: block !important;
         visibility: visible !important;
         object-fit: contain !important;
-        filter: none !important;
-        transform: none !important;
     }
 }
 
 @media screen and (max-width: 480px) {
     .floating-logo {
-        position: fixed !important;
         top: 55px !important;
         right: 8px !important;
-        left: auto !important;
-        z-index: 99999 !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: none !important;
-        animation: float 10s ease-in-out infinite !important;
-        transform: none !important;
     }
 
     .floating-logo img {
         width: 130px !important;
-        height: auto !important;
         max-width: 130px !important;
-        opacity: 1 !important;
-        display: block !important;
-        visibility: visible !important;
-        object-fit: contain !important;
-        filter: none !important;
-        transform: none !important;
     }
 }
 
-/* Extra small screens */
 @media screen and (max-width: 360px) {
     .floating-logo {
-        position: fixed !important;
         top: 50px !important;
         right: 5px !important;
-        left: auto !important;
-        z-index: 99999 !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: none !important;
-        animation: float 10s ease-in-out infinite !important;
-        transform: none !important;
     }
 
     .floating-logo img {
         width: 110px !important;
-        height: auto !important;
         max-width: 110px !important;
-        opacity: 1 !important;
-        display: block !important;
-        visibility: visible !important;
-        object-fit: contain !important;
-        filter: none !important;
-        transform: none !important;
     }
 }
 
@@ -278,7 +135,6 @@ img#floating-image {
     padding: 0 20px;
 }
 
-/* Navigation */
 .navbar {
     position: fixed;
     top: 0;
@@ -301,7 +157,6 @@ img#floating-image {
     height: 40px;
 }
 
-/* Navigation Logo Styles */
 .nav-logo {
     display: flex;
     align-items: center;
@@ -362,7 +217,6 @@ img#floating-image {
     transition: 0.3s;
 }
 
-/* Hero Section */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -462,7 +316,6 @@ img#floating-image {
     transform: translateY(-2px);
 }
 
-/* Hero Illustration */
 .hero-image {
     position: relative;
     height: 500px;
@@ -483,7 +336,6 @@ img#floating-image {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    /* animation: float 3s ease-in-out infinite; */
 }
 
 .floating-card i {
@@ -600,8 +452,6 @@ img#floating-image {
     animation: grow 2s ease-out infinite;
 }
 
-
-
 @keyframes pulse {
     0%, 100% { transform: scale(1); opacity: 0.2; }
     50% { transform: scale(1.1); opacity: 0.3; }
@@ -612,7 +462,6 @@ img#floating-image {
     100% { height: var(--height, 50%); }
 }
 
-/* Features Section */
 .features {
     padding: 6rem 0;
     background: #f8fafc;
@@ -683,7 +532,6 @@ img#floating-image {
     line-height: 1.6;
 }
 
-/* Stats Section */
 .stats {
     padding: 4rem 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -708,7 +556,6 @@ img#floating-image {
     opacity: 0.9;
 }
 
-/* CTA Section */
 .cta {
     padding: 6rem 0;
     background: var(--grey-dark);
@@ -728,75 +575,58 @@ img#floating-image {
     opacity: 0.9;
 }
 
-/* Footer */
 .footer {
-    background: #111827;
+    background: var(--gradient-1);
     color: white;
     padding: 3rem 0 1rem;
+    margin-top: 4rem;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
     margin-bottom: 2rem;
 }
 
-.footer-section h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-section ul li a {
-    color: #9ca3af;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-section ul li a:hover {
-    color: white;
-}
-
-.social-links {
+.footer-logo {
     display: flex;
-    gap: 1rem;
+    align-items: flex-start;
+    gap: 15px;
 }
 
-.social-links a {
-    width: 40px;
-    height: 40px;
-    background: #374151;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.footer-logo-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.footer-logo-text h3 {
     color: white;
-    text-decoration: none;
-    transition: all 0.3s ease;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
 }
 
-.social-links a:hover {
-    background: #6366f1;
-    transform: translateY(-2px);
+.footer-logo-text p {
+    color: #d1d5db;
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
 }
 
 .footer-bottom {
-    border-top: 1px solid #374151;
-    padding-top: 1rem;
+    border-top: 1px solid #4b5563;
+    padding-top: 1.5rem;
     text-align: center;
-    color: #9ca3af;
 }
 
-/* Responsive Design */
+.footer-bottom p {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
 @media (max-width: 768px) {
     .nav-menu {
         position: fixed;
@@ -826,7 +656,6 @@ img#floating-image {
         padding: 0 15px;
     }
 
-    /* Clean mobile hero section */
     .hero {
         padding-top: 60px;
     }
@@ -857,12 +686,19 @@ img#floating-image {
         margin: 0 auto;
     }
 
-    .hero-title {
-        font-size: 2.5rem;
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-logo {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
     }
 }
 
-/* Mobile specific improvements for 480px and below */
 @media (max-width: 480px) {
     .hero-title {
         font-size: 1.5rem !important;
@@ -886,7 +722,6 @@ img#floating-image {
     }
 }
 
-/* Extra small screens improvements */
 @media (max-width: 360px) {
     .hero-title {
         font-size: 1.3rem !important;
@@ -919,156 +754,4 @@ img#floating-image {
     }
 }
 
-/* Footer Styles */
-.footer {
-    background: var(--gradient-1);
-    color: white;
-    padding: 3rem 0 1rem;
-    margin-top: 4rem;
-}
 
-.footer-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 2rem;
-}
-
-.footer-logo {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-}
-
-.footer-logo-img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    filter: brightness(0) invert(1); /* Make logo white */
-}
-
-.footer-logo-text h3 {
-    color: white;
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0 0 0.5rem 0;
-}
-
-.footer-logo-text p {
-    color: #d1d5db;
-    margin: 0.2rem 0;
-    font-size: 0.9rem;
-}
-
-.footer-links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-}
-
-.footer-column h4 {
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.footer-column ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-column ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-column ul li a {
-    color: #d1d5db;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-column ul li a:hover {
-    color: white;
-}
-
-.footer-bottom {
-    border-top: 1px solid #4b5563;
-    padding-top: 1.5rem;
-    text-align: center;
-}
-
-.footer-bottom p {
-    color: #9ca3af;
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-/* Footer Mobile Responsive */
-@media (max-width: 768px) {
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .footer-logo {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 10px;
-    }
-
-    .footer-links {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    /* Ensure floating logo is always visible on mobile */
-    .floating-logo {
-        position: fixed !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        z-index: 99999 !important;
-        right: 10px !important;
-        top: 60px !important;
-        left: auto !important;
-    }
-    
-    .floating-logo img {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        width: 120px !important;
-        height: auto !important;
-    }
-}
-
-/* Emergency mobile floating logo - force visibility at all costs */
-@media screen and (max-width: 768px) {
-    body .floating-logo {
-        position: fixed !important;
-        top: 20px !important;
-        right: 20px !important;
-        left: auto !important;
-        z-index: 999999 !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: none !important;
-        animation: pulse 2s infinite !important;
-    }
-    
-    body .floating-logo img {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        width: 100px !important;
-        height: auto !important;
-    }
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
