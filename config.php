@@ -161,18 +161,6 @@ $currentImage = getCurrentSelectedImage();
             </div>
         </form>
 
-        <div class="info-section">
-            <div class="info-card">
-                <h3><i class="fas fa-info-circle"></i> How it works</h3>
-                <ul>
-                    <li>Select an image number (1-50)</li>
-                    <li>Preview your selection</li>
-                    <li>Click "Apply Selection" to save it</li>
-                    <li>The main page will display your chosen image immediately</li>
-                    <li>Image stays fixed until you change it</li>
-                </ul>
-            </div>
-        </div>
 
 
     </div>
